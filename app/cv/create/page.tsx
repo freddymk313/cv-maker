@@ -94,7 +94,7 @@ export default function CreateCv() {
 
   if (isFetching) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[400px]">
+      <div className="flex flex-col items-center justify-center min-h-100">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600 mb-4"></div>
         <p className="text-gray-500 font-medium">Récupération de votre brouillon...</p>
       </div>
@@ -135,7 +135,7 @@ export default function CreateCv() {
       </div>
 
       {/* --- ZONE DU FORMULAIRE --- */}
-      <div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 p-8 min-h-[450px] relative">
+      <div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 p-8 min-h-112.5 relative">
         <div className="mb-8 border-b border-gray-50 pb-4">
           <h2 className="text-2xl font-bold text-gray-800 tracking-tight">
             {steps[currentStep].label}
