@@ -2,7 +2,7 @@
 
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
-import { LogOut, FilePlus, User as UserIcon, Briefcase } from "lucide-react"; // Optionnel : npm install lucide-react
+import { LogOut, FilePlus, User as UserIcon, Briefcase, Eye } from "lucide-react";
 
 export default function Dashboard() {
   const { data: session, status } = useSession();
@@ -63,15 +63,28 @@ export default function Dashboard() {
               </p>
             </div>
             
-            {/* BOUTON CRÉER CV */}
+            {/* ACTIONS CV */}
             {session.user.role === "CANDIDAT" && (
-              <Link 
-                href="/dashboard/cv/create" 
-                className="mt-4 md:mt-0 flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-200 font-semibold"
-              >
-                <FilePlus className="w-5 h-5" />
-                Créer mon CV Automatique
-              </Link>
+              <div className="mt-4 md:mt-0 flex flex-wrap gap-3">
+                {/* BOUTON PREVIEW */}
+                <Link 
+                  href={`/cv/preview/${session.user.id}`} 
+                  target="_blank" // Ouvre dans un nouvel onglet
+                  className="flex items-center gap-2 bg-white text-gray-700 border border-gray-200 px-6 py-3 rounded-xl hover:bg-gray-50 transition-all font-semibold"
+                >
+                  <Eye className="w-5 h-5 text-gray-500" />
+                  Voir mon CV
+                </Link>
+
+                {/* BOUTON CRÉER / MODIFIER */}
+                <Link 
+                  href="/cv/create" 
+                  className="flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-200 font-semibold"
+                >
+                  <FilePlus className="w-5 h-5" />
+                  Modifier mon CV
+                </Link>
+              </div>
             )}
           </div>
 
