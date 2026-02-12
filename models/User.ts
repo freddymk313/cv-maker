@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema({
   companyId: { type: mongoose.Schema.Types.ObjectId, ref: 'Company', default: null },
   
   // Pour les candidats
-  cvId: { type: mongoose.Schema.Types.ObjectId, ref: 'CV' }, 
+  cvId: { type: mongoose.Schema.Types.ObjectId, ref: 'Cv' }, 
   
   createdAt: { type: Date, default: Date.now },
 });
