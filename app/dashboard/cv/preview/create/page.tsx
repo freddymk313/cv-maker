@@ -13,13 +13,14 @@ import {
   Languages,
   Layout,
 } from "lucide-react";
+
+// Tes imports de composants
 import PersonalInfoForm from "@/components/cv/PersonalInfoForm";
 import ExperiencesForm from "@/components/cv/ExperiencesForm";
 import EducationForm from "@/components/cv/EducationForm";
 import SkillsForm from "@/components/cv/SkillsForm";
 import LanguagesForm from "@/components/cv/LanguagesForm";
 import TemplateForm from "@/components/cv/TemplateForm";
-// import PersonalInfoForm from "./_components/PersonalInfoForm"; // Importation du sous-composant
 
 const steps = [
   { id: "personalInfo", label: "Infos", icon: User },
@@ -33,21 +34,24 @@ const steps = [
 export default function CreateCv() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [isFetching, setIsFetching] = useState(true); // État pour le chargement initial
-  const [cvData, setCvData] = useState<any>(null); // Données venant de la DB
+  const [isFetching, setIsFetching] = useState(true);
+  const [cvData, setCvData] = useState<any>(null);
   const router = useRouter();
 
-  // --- 1. CHARGEMENT DES DONNÉES EXISTANTES ---
+  // --- CHARGEMENT INITIAL ---
   useEffect(() => {
     const fetchCv = async () => {
       try {
         const res = await fetch("/api/cv");
-        const data = await res.json();
-        if (data) {
-          setCvData(data);
+        if (res.ok) {
+          const data = await res.json();
+          // On vérifie si data n'est pas vide (null ou {})
+          if (data && Object.keys(data).length > 0) {
+            setCvData(data);
+          }
         }
       } catch (error) {
-        console.error("Erreur lors de la récupération du CV", error);
+        console.error("Erreur de récupération:", error);
       } finally {
         setIsFetching(false);
       }
@@ -55,11 +59,10 @@ export default function CreateCv() {
     fetchCv();
   }, []);
 
-  const nextStep = () =>
-    setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
+  const nextStep = () => setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
   const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
 
-  // Fonction centrale pour sauvegarder chaque étape via ton API
+  // --- SAUVEGARDE ET MISE À JOUR LOCALE ---
   const saveStepData = async (stepId: string, data: any) => {
     setIsLoading(true);
     try {
@@ -69,28 +72,31 @@ export default function CreateCv() {
         body: JSON.stringify({ step: stepId, data }),
       });
 
-      if (!response.ok) throw new Error("Erreur de sauvegarde");
+      const result = await response.json();
+
+      if (!response.ok) throw new Error(result.message || "Erreur de sauvegarde");
+
+      // Mise à jour de l'état local avec le CV complet retourné par l'API
+      // Cela permet d'avoir les données fraîches pour l'étape suivante ou précédente
+      setCvData(result.cv);
 
       if (currentStep === steps.length - 1) {
-        router.push("/dashboard"); // Terminé !
+        router.push("/dashboard");
       } else {
         nextStep();
       }
-    } catch (error) {
-      alert("Erreur lors de la sauvegarde. Vérifiez votre connexion.");
+    } catch (error: any) {
+      alert(error.message || "Erreur lors de la sauvegarde.");
     } finally {
       setIsLoading(false);
     }
   };
 
-  // --- 2. GESTION DE L'ATTENTE ---
   if (isFetching) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-100">
+      <div className="flex flex-col items-center justify-center min-h-[400px]">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600 mb-4"></div>
-        <p className="text-gray-500 font-medium">
-          Récupération de votre brouillon...
-        </p>
+        <p className="text-gray-500 font-medium">Récupération de votre brouillon...</p>
       </div>
     );
   }
@@ -107,10 +113,7 @@ export default function CreateCv() {
             const isActive = currentStep === index;
 
             return (
-              <div
-                key={step.id}
-                className="relative z-10 flex flex-col items-center"
-              >
+              <div key={step.id} className="relative z-10 flex flex-col items-center">
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
                     isCompleted
@@ -120,15 +123,9 @@ export default function CreateCv() {
                         : "bg-white border-2 border-gray-300 text-gray-400"
                   }`}
                 >
-                  {isCompleted ? (
-                    <Check className="w-5 h-5" />
-                  ) : (
-                    <Icon className="w-5 h-5" />
-                  )}
+                  {isCompleted ? <Check className="w-5 h-5" /> : <Icon className="w-5 h-5" />}
                 </div>
-                <span
-                  className={`absolute -bottom-7 text-xs font-medium whitespace-nowrap ${isActive ? "text-blue-600" : "text-gray-500"}`}
-                >
+                <span className={`absolute -bottom-7 text-xs font-medium whitespace-nowrap ${isActive ? "text-blue-600" : "text-gray-500"}`}>
                   {step.label}
                 </span>
               </div>
@@ -138,17 +135,14 @@ export default function CreateCv() {
       </div>
 
       {/* --- ZONE DU FORMULAIRE --- */}
-      <div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 p-8 min-h-100">
+      <div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 p-8 min-h-[450px] relative">
         <div className="mb-8 border-b border-gray-50 pb-4">
           <h2 className="text-2xl font-bold text-gray-800 tracking-tight">
             {steps[currentStep].label}
           </h2>
-          <p className="text-gray-500 text-sm">
-            Veuillez remplir les informations ci-dessous.
-          </p>
+          <p className="text-gray-500 text-sm">Veuillez remplir les informations ci-dessous.</p>
         </div>
 
-        {/* AFFICHAGE DES ÉTAPES */}
         <div className="py-4">
           {currentStep === 0 && (
             <PersonalInfoForm
@@ -160,7 +154,7 @@ export default function CreateCv() {
 
           {currentStep === 1 && (
             <ExperiencesForm
-            initialData={cvData?.experiences}
+              initialData={cvData?.experiences}
               onSubmit={(data) => saveStepData("experiences", data)}
               isLoading={isLoading}
             />
@@ -168,7 +162,7 @@ export default function CreateCv() {
 
           {currentStep === 2 && (
             <EducationForm
-            initialData={cvData?.education}
+              initialData={cvData?.education}
               onSubmit={(data) => saveStepData("education", data)}
               isLoading={isLoading}
             />
@@ -176,7 +170,7 @@ export default function CreateCv() {
 
           {currentStep === 3 && (
             <SkillsForm
-            initialData={cvData?.skills}
+              initialData={cvData?.skills}
               onSubmit={(data) => saveStepData("skills", data)}
               isLoading={isLoading}
             />
@@ -184,7 +178,7 @@ export default function CreateCv() {
 
           {currentStep === 4 && (
             <LanguagesForm
-            initialData={cvData?.languages}
+              initialData={cvData?.languages}
               onSubmit={(data) => saveStepData("languages", data)}
               isLoading={isLoading}
             />
@@ -192,20 +186,11 @@ export default function CreateCv() {
 
           {currentStep === 5 && (
             <TemplateForm
-            // initialData={cvData?.template}
-              initialData={undefined} // Tu pourras passer la donnée récupérée de la DB ici
+              initialData={cvData?.templateId}
               onSubmit={(data) => saveStepData("template", data)}
               isLoading={isLoading}
             />
           )}
-
-          {/* {currentStep > 0 && (
-            <div className="text-center py-20">
-              <p className="text-gray-400 italic">
-                Étape {steps[currentStep].label} en cours de développement...
-              </p>
-            </div>
-          )} */}
         </div>
 
         {/* --- NAVIGATION --- */}
@@ -222,12 +207,12 @@ export default function CreateCv() {
 
           <button
             type="submit"
-            form="cv-form" // Très important : lie ce bouton au formulaire actif
+            form="cv-form"
             disabled={isLoading}
             className="flex items-center gap-2 px-8 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-all shadow-md shadow-blue-100 disabled:opacity-50"
           >
             {isLoading
-              ? "Enregistrement..."
+              ? "Sauvegarde..."
               : currentStep === steps.length - 1
                 ? "Terminer"
                 : "Suivant"}
