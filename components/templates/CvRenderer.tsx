@@ -1,4 +1,5 @@
 // src/components/cv/templates/CvRenderer.tsx
+import BenjaminLeroyTemplate from "./BenjaminLeroyTemplate";
 import ClassicTemplate from "./ClassicTemplate";
 import ModernTemplate from "./ModernTemplate";
 import SimpleModernTemplate from "./SimpleModernTemplate";
@@ -17,7 +18,7 @@ export default function CvRenderer({ cv }: { cv: any }) {
       }}
     >
       {template === "classic" && <ClassicTemplate data={cv} />}
-      {template === "modern" && <SimpleModernTemplate data={cv} />}
+      {template === "modern" && <BenjaminLeroyTemplate data={cv} />}
       {template === "creative" && <ModernTemplate data={cv} />}
     </div>
   );
