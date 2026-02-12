@@ -58,7 +58,7 @@ export default function BenjaminLeroyTemplate({ data }: { data: any }) {
       </aside>
 
       {/* --- COLONNE DROITE (MAIN CONTENT) --- [cite: 3, 19, 33] */}
-      <main className="w-[65%] p-12">
+      <main className="w-[65%] p-12"> 
         
         {/* Résumé Professionnel [cite: 3] */}  
         <div className="mb-12 text-[11px] leading-relaxed italic text-gray-700 text-justify pr-6 border-b border-gray-100 pb-8">
