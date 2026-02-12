@@ -52,3 +52,14 @@ export const skillsSchema = z.object({
 });
 
 export type SkillsInput = z.infer<typeof skillsSchema>;
+
+export const languagesSchema = z.object({
+  languages: z.array(
+    z.object({
+      language: z.string().min(1, "La langue est requise"),
+      level: z.enum(["Débutant", "Intermédiaire", "Avancé", "Langue maternelle"]),
+    })
+  ).min(1, "Ajoutez au moins une langue"),
+});
+
+export type LanguagesInput = z.infer<typeof languagesSchema>;

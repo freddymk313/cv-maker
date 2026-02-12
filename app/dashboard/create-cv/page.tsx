@@ -17,6 +17,7 @@ import PersonalInfoForm from "@/components/cv/PersonalInfoForm";
 import ExperiencesForm from "@/components/cv/ExperiencesForm";
 import EducationForm from "@/components/cv/EducationForm";
 import SkillsForm from "@/components/cv/SkillsForm";
+import LanguagesForm from "@/components/cv/LanguagesForm";
 // import PersonalInfoForm from "./_components/PersonalInfoForm"; // Importation du sous-composant
 
 const steps = [
@@ -140,6 +141,13 @@ export default function CreateCv() {
           {currentStep === 3 && (
             <SkillsForm
               onSubmit={(data) => saveStepData("skills", data)}
+              isLoading={isLoading}
+            />
+          )}
+
+          {currentStep === 4 && (
+            <LanguagesForm
+              onSubmit={(data) => saveStepData("languages", data)}
               isLoading={isLoading}
             />
           )}
