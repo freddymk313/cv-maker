@@ -15,6 +15,8 @@ import {
 } from "lucide-react";
 import PersonalInfoForm from "@/components/cv/PersonalInfoForm";
 import ExperiencesForm from "@/components/cv/ExperiencesForm";
+import EducationForm from "@/components/cv/EducationForm";
+import SkillsForm from "@/components/cv/SkillsForm";
 // import PersonalInfoForm from "./_components/PersonalInfoForm"; // Importation du sous-composant
 
 const steps = [
@@ -128,13 +130,27 @@ export default function CreateCv() {
             />
           )}
 
-          {currentStep > 0 && (
+          {currentStep === 2 && (
+            <EducationForm
+              onSubmit={(data) => saveStepData("education", data)}
+              isLoading={isLoading}
+            />
+          )}
+
+          {currentStep === 3 && (
+            <SkillsForm
+              onSubmit={(data) => saveStepData("skills", data)}
+              isLoading={isLoading}
+            />
+          )}
+
+          {/* {currentStep > 0 && (
             <div className="text-center py-20">
               <p className="text-gray-400 italic">
                 Étape {steps[currentStep].label} en cours de développement...
               </p>
             </div>
-          )}
+          )} */}
         </div>
 
         {/* --- NAVIGATION --- */}

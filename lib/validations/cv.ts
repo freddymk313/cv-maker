@@ -27,3 +27,28 @@ export const experienceSchema = z.object({
 });
 
 export type ExperienceInput = z.infer<typeof experienceSchema>;
+
+export const educationSchema = z.object({
+  education: z.array(
+    z.object({
+      school: z.string().min(2, "Nom de l'établissement requis"),
+      degree: z.string().min(2, "Diplôme requis (ex: Licence)"),
+      fieldOfStudy: z.string().optional(),
+      startDate: z.string().optional(), // Optionnel pour les études
+      endDate: z.string().min(1, "Année d'obtention requise"),
+    })
+  ).min(1, "Ajoutez au moins une formation"),
+});
+
+export type EducationInput = z.infer<typeof educationSchema>;
+
+export const skillsSchema = z.object({
+  skills: z.array(
+    z.object({
+      name: z.string().min(1, "Le nom de la compétence est requis"),
+      level: z.number().min(1).max(5).default(3),
+    })
+  ).min(1, "Ajoutez au moins une compétence"),
+});
+
+export type SkillsInput = z.infer<typeof skillsSchema>;
