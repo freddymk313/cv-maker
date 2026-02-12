@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronRight, ChevronLeft, Check, User, Briefcase, GraduationCap, Code, Languages, Layout } from "lucide-react";
-import PersonalInfoForm from "@/components/PersonalInfoForm";
+import PersonalInfoForm from "@/components/cv/PersonalInfoForm";
 // import PersonalInfoForm from "./_components/PersonalInfoForm"; // Importation du sous-composant
 
 const steps = [
@@ -76,7 +76,7 @@ export default function CreateCv() {
       </div>
 
       {/* --- ZONE DU FORMULAIRE --- */}
-      <div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 p-8 min-h-[400px]">
+      <div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 p-8 min-h-100">
         <div className="mb-8 border-b border-gray-50 pb-4">
           <h2 className="text-2xl font-bold text-gray-800 tracking-tight">
             {steps[currentStep].label}
