@@ -1,46 +1,69 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-// import dbConnect from "@/lib/dbConnect";
 import Cv from "@/models/Cv";
 import dbConnect from "@/lib/mongodb";
 
 export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions);
-
-    // 1. Vérification de l'authentification
-    if (!session || !session.user) {
+    if (!session?.user?.id) {
       return NextResponse.json({ message: "Non autorisé" }, { status: 401 });
     }
 
-    const data = await req.json();
+    const { step, data } = await req.json();
     await dbConnect();
 
-    // 2. Mise à jour ou Création (Upsert)
-    // On utilise l'ID de l'utilisateur de la session pour la sécurité
+    const allowedSteps = [
+      "personalInfo",
+      "experiences",
+      "education",
+      "skills",
+      "languages",
+      "template"
+    ];
+
+    if (!allowedSteps.includes(step)) {
+      return NextResponse.json({ message: "Step invalide" }, { status: 400 });
+    }
+
+    const updateData: any = {};
+
+    switch (step) {
+      case "personalInfo":
+        updateData.personalInfo = data;
+        break;
+
+      case "experiences":
+        updateData.experiences = data;
+        break;
+
+      case "education":
+        updateData.education = data;
+        break;
+
+      case "skills":
+        updateData.skills = data;
+        break;
+
+      case "languages":
+        updateData.languages = data;
+        break;
+
+      case "template":
+        updateData.templateId = data.templateId;
+        break;
+    }
+
     const cv = await Cv.findOneAndUpdate(
       { userId: session.user.id },
-      { 
-        $set: { 
-          ...data, 
-          userId: session.user.id // On force l'ID utilisateur
-        } 
-      },
+      { $set: updateData },
       { new: true, upsert: true, runValidators: true }
     );
 
-    return NextResponse.json({ 
-      message: "Progression sauvegardée", 
-      cv 
-    }, { status: 200 });
-
+    return NextResponse.json({ message: "Sauvegardé", cv });
   } catch (error: any) {
-    console.error("Erreur CV API:", error);
-    return NextResponse.json({ 
-      message: "Erreur lors de la sauvegarde", 
-      error: error.message 
-    }, { status: 500 });
+    return NextResponse.json({ message: "Erreur serveur" }, { status: 500 });
   }
 }
 
