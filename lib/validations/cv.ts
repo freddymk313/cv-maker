@@ -63,3 +63,9 @@ export const languagesSchema = z.object({
 });
 
 export type LanguagesInput = z.infer<typeof languagesSchema>;
+
+export const templateSchema = z.object({
+  templateId: z.string().min(1, "Veuillez choisir un modèle"),
+});
+
+export type TemplateInput = z.infer<typeof templateSchema>;
