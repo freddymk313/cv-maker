@@ -2,8 +2,19 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronRight, ChevronLeft, Check, User, Briefcase, GraduationCap, Code, Languages, Layout } from "lucide-react";
+import {
+  ChevronRight,
+  ChevronLeft,
+  Check,
+  User,
+  Briefcase,
+  GraduationCap,
+  Code,
+  Languages,
+  Layout,
+} from "lucide-react";
 import PersonalInfoForm from "@/components/cv/PersonalInfoForm";
+import ExperiencesForm from "@/components/cv/ExperiencesForm";
 // import PersonalInfoForm from "./_components/PersonalInfoForm"; // Importation du sous-composant
 
 const steps = [
@@ -20,7 +31,8 @@ export default function CreateCv() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const nextStep = () => setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
+  const nextStep = () =>
+    setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
   const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
 
   // Fonction centrale pour sauvegarder chaque étape via ton API
@@ -34,7 +46,7 @@ export default function CreateCv() {
       });
 
       if (!response.ok) throw new Error("Erreur de sauvegarde");
-      
+
       if (currentStep === steps.length - 1) {
         router.push("/dashboard"); // Terminé !
       } else {
@@ -59,14 +71,28 @@ export default function CreateCv() {
             const isActive = currentStep === index;
 
             return (
-              <div key={step.id} className="relative z-10 flex flex-col items-center">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
-                  isCompleted ? "bg-green-500 text-white" : 
-                  isActive ? "bg-blue-600 text-white ring-4 ring-blue-100" : "bg-white border-2 border-gray-300 text-gray-400"
-                }`}>
-                  {isCompleted ? <Check className="w-5 h-5" /> : <Icon className="w-5 h-5" />}
+              <div
+                key={step.id}
+                className="relative z-10 flex flex-col items-center"
+              >
+                <div
+                  className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
+                    isCompleted
+                      ? "bg-green-500 text-white"
+                      : isActive
+                        ? "bg-blue-600 text-white ring-4 ring-blue-100"
+                        : "bg-white border-2 border-gray-300 text-gray-400"
+                  }`}
+                >
+                  {isCompleted ? (
+                    <Check className="w-5 h-5" />
+                  ) : (
+                    <Icon className="w-5 h-5" />
+                  )}
                 </div>
-                <span className={`absolute -bottom-7 text-xs font-medium whitespace-nowrap ${isActive ? "text-blue-600" : "text-gray-500"}`}>
+                <span
+                  className={`absolute -bottom-7 text-xs font-medium whitespace-nowrap ${isActive ? "text-blue-600" : "text-gray-500"}`}
+                >
                   {step.label}
                 </span>
               </div>
@@ -81,22 +107,33 @@ export default function CreateCv() {
           <h2 className="text-2xl font-bold text-gray-800 tracking-tight">
             {steps[currentStep].label}
           </h2>
-          <p className="text-gray-500 text-sm">Veuillez remplir les informations ci-dessous.</p>
+          <p className="text-gray-500 text-sm">
+            Veuillez remplir les informations ci-dessous.
+          </p>
         </div>
 
         {/* AFFICHAGE DES ÉTAPES */}
         <div className="py-4">
           {currentStep === 0 && (
-            <PersonalInfoForm 
-              onSubmit={(data) => saveStepData("personalInfo", data)} 
-              isLoading={isLoading} 
+            <PersonalInfoForm
+              onSubmit={(data) => saveStepData("personalInfo", data)}
+              isLoading={isLoading}
+            />
+          )}
+
+          {currentStep === 1 && (
+            <ExperiencesForm
+              onSubmit={(data) => saveStepData("experiences", data)}
+              isLoading={isLoading}
             />
           )}
 
           {currentStep > 0 && (
-             <div className="text-center py-20">
-                <p className="text-gray-400 italic">Étape {steps[currentStep].label} en cours de développement...</p>
-             </div>
+            <div className="text-center py-20">
+              <p className="text-gray-400 italic">
+                Étape {steps[currentStep].label} en cours de développement...
+              </p>
+            </div>
           )}
         </div>
 
@@ -111,15 +148,21 @@ export default function CreateCv() {
             <ChevronLeft className="w-4 h-4" />
             Précédent
           </button>
-          
+
           <button
             type="submit"
             form="cv-form" // Très important : lie ce bouton au formulaire actif
             disabled={isLoading}
             className="flex items-center gap-2 px-8 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-all shadow-md shadow-blue-100 disabled:opacity-50"
           >
-            {isLoading ? "Enregistrement..." : currentStep === steps.length - 1 ? "Terminer" : "Suivant"}
-            {currentStep !== steps.length - 1 && !isLoading && <ChevronRight className="w-4 h-4" />}
+            {isLoading
+              ? "Enregistrement..."
+              : currentStep === steps.length - 1
+                ? "Terminer"
+                : "Suivant"}
+            {currentStep !== steps.length - 1 && !isLoading && (
+              <ChevronRight className="w-4 h-4" />
+            )}
           </button>
         </div>
       </div>
