@@ -1,14 +1,24 @@
+// src/components/cv/templates/CvRenderer.tsx
 import ClassicTemplate from "./ClassicTemplate";
 import ModernTemplate from "./ModernTemplate";
+import SimpleModernTemplate from "./SimpleModernTemplate";
 
 export default function CvRenderer({ cv }: { cv: any }) {
-  // On s'assure que le templateId existe, sinon "classic" par défaut
   const template = cv.templateId || "classic";
 
   return (
-    <div className="bg-white shadow-2xl mx-auto my-10 print:my-0 print:shadow-none min-h-[29.7cm] w-[21cm] overflow-hidden">
+    /* Conteneur de la feuille A4 */
+    <div 
+      className="bg-white shadow-2xl mx-auto print:my-0 print:shadow-none overflow-hidden ring-1 ring-gray-200"
+      style={{ 
+        width: "21cm", 
+        minHeight: "29.7cm",
+        height: "fit-content" 
+      }}
+    >
       {template === "classic" && <ClassicTemplate data={cv} />}
-      {template === "modern" && <ModernTemplate data={cv} />}
+      {template === "modern" && <SimpleModernTemplate data={cv} />}
+      {template === "creative" && <ModernTemplate data={cv} />}
     </div>
   );
 }

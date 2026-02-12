@@ -1,5 +1,5 @@
-// import dbConnect from "@/lib/dbConnect";
-import CvRenderer from "@/components/templates/CvRenderer";
+// app/cv/preview/[id]/page.tsx
+import PreviewClient from "@/components/cv/PreviewClient";
 import dbConnect from "@/lib/mongodb";
 import Cv from "@/models/Cv";
 import { notFound } from "next/navigation";
@@ -9,23 +9,18 @@ interface Props {
 }
 
 export default async function CvPreviewPage({ params }: Props) {
-  // 2. On attend (await) que les paramètres soient résolus
   const { id } = await params;
 
   await dbConnect();
 
-  console.log("ID recherché dans l'URL :", id); // Maintenant ça affichera le bon ID !
+  const cvData = await Cv.findOne({ userId: id }).lean();
 
-  // 3. On utilise l'id "attendu" pour la recherche
-  const cv = await Cv.findOne({ userId: id }).lean();
+  if (!cvData) return notFound();
 
-  console.log("CV trouvé en base :", cv);
+  // --- LA CORRECTION ICI ---
+  // On transforme l'objet Mongoose en objet JS simple (JSON-safe)
+  // Cela convertit les ObjectId en String et supprime les méthodes internes
+  const serializedCv = JSON.parse(JSON.stringify(cvData));
 
-  if (!cv) return notFound();
-
-  return (
-   <div className="min-h-screen bg-zinc-800 flex justify-center py-10 overflow-x-auto">
-    <CvRenderer cv={cv} />
-  </div>
-  );
+  return <PreviewClient cv={serializedCv} />;
 }
