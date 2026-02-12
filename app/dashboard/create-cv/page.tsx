@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   ChevronRight,
@@ -33,7 +33,27 @@ const steps = [
 export default function CreateCv() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [isFetching, setIsFetching] = useState(true); // État pour le chargement initial
+  const [cvData, setCvData] = useState<any>(null); // Données venant de la DB
   const router = useRouter();
+
+  // --- 1. CHARGEMENT DES DONNÉES EXISTANTES ---
+  useEffect(() => {
+    const fetchCv = async () => {
+      try {
+        const res = await fetch("/api/cv");
+        const data = await res.json();
+        if (data) {
+          setCvData(data);
+        }
+      } catch (error) {
+        console.error("Erreur lors de la récupération du CV", error);
+      } finally {
+        setIsFetching(false);
+      }
+    };
+    fetchCv();
+  }, []);
 
   const nextStep = () =>
     setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
@@ -62,6 +82,18 @@ export default function CreateCv() {
       setIsLoading(false);
     }
   };
+
+  // --- 2. GESTION DE L'ATTENTE ---
+  if (isFetching) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-100">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600 mb-4"></div>
+        <p className="text-gray-500 font-medium">
+          Récupération de votre brouillon...
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto py-10 px-4">
@@ -120,6 +152,7 @@ export default function CreateCv() {
         <div className="py-4">
           {currentStep === 0 && (
             <PersonalInfoForm
+              initialData={cvData?.personalInfo}
               onSubmit={(data) => saveStepData("personalInfo", data)}
               isLoading={isLoading}
             />
@@ -127,6 +160,7 @@ export default function CreateCv() {
 
           {currentStep === 1 && (
             <ExperiencesForm
+            initialData={cvData?.experiences}
               onSubmit={(data) => saveStepData("experiences", data)}
               isLoading={isLoading}
             />
@@ -134,6 +168,7 @@ export default function CreateCv() {
 
           {currentStep === 2 && (
             <EducationForm
+            initialData={cvData?.education}
               onSubmit={(data) => saveStepData("education", data)}
               isLoading={isLoading}
             />
@@ -141,6 +176,7 @@ export default function CreateCv() {
 
           {currentStep === 3 && (
             <SkillsForm
+            initialData={cvData?.skills}
               onSubmit={(data) => saveStepData("skills", data)}
               isLoading={isLoading}
             />
@@ -148,6 +184,7 @@ export default function CreateCv() {
 
           {currentStep === 4 && (
             <LanguagesForm
+            initialData={cvData?.languages}
               onSubmit={(data) => saveStepData("languages", data)}
               isLoading={isLoading}
             />
@@ -155,6 +192,7 @@ export default function CreateCv() {
 
           {currentStep === 5 && (
             <TemplateForm
+            // initialData={cvData?.template}
               initialData={undefined} // Tu pourras passer la donnée récupérée de la DB ici
               onSubmit={(data) => saveStepData("template", data)}
               isLoading={isLoading}
