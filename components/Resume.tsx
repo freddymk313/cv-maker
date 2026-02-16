@@ -23,9 +23,18 @@ const Resume = () => {
           {/* Contact */}
           <div className="space-y-3 mb-10">
             <ContactItem icon={<Phone size={14} />} text="+123-456-7890" />
-            <ContactItem icon={<Mail size={14} />} text="hello@reallygreatsite.com" />
-            <ContactItem icon={<MapPin size={14} />} text="123 Anywhere St., Any City" />
-            <ContactItem icon={<Globe size={14} />} text="www.reallygreatsite.com" />
+            <ContactItem
+              icon={<Mail size={14} />}
+              text="hello@reallygreatsite.com"
+            />
+            <ContactItem
+              icon={<MapPin size={14} />}
+              text="123 Anywhere St., Any City"
+            />
+            <ContactItem
+              icon={<Globe size={14} />}
+              text="www.reallygreatsite.com"
+            />
           </div>
 
           {/* Education */}
@@ -71,10 +80,10 @@ const Resume = () => {
           <div className="mb-10">
             <SectionHeading>PROFILE</SectionHeading>
             <p className="mt-5 text-sm text-resume-body leading-relaxed">
-              A visual artist creates works of art using a variety of
-              materials. As a visual artist, your duties may be to draw
-              images, work with paint, develop murals, design in 3D, or
-              create art with mixed media.
+              A visual artist creates works of art using a variety of materials.
+              As a visual artist, your duties may be to draw images, work with
+              paint, develop murals, design in 3D, or create art with mixed
+              media.
             </p>
           </div>
 
@@ -118,7 +127,13 @@ const SectionHeading = ({ children }: { children: React.ReactNode }) => (
   </h2>
 );
 
-const ContactItem = ({ icon, text }: { icon: React.ReactNode; text: string }) => (
+const ContactItem = ({
+  icon,
+  text,
+}: {
+  icon: React.ReactNode;
+  text: string;
+}) => (
   <div className="flex items-center gap-3 text-sm text-resume-body">
     <span className="text-resume-icon">{icon}</span>
     <span>{text}</span>
@@ -162,7 +177,9 @@ const WorkItem = ({
     <p className="text-sm text-resume-muted mt-0.5">
       {company} | {years}
     </p>
-    <p className="text-sm text-resume-body leading-relaxed mt-2">{description}</p>
+    <p className="text-sm text-resume-body leading-relaxed mt-2">
+      {description}
+    </p>
     <ul className="mt-2 space-y-1 list-disc list-outside pl-5 text-sm text-resume-body leading-relaxed">
       {bullets.map((b, i) => (
         <li key={i}>{b}</li>
