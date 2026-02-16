@@ -32,7 +32,7 @@ const SimpleModel = ({ cv }: ResumeProps) => {
       </header>
 
       {/* Divider */}
-      <div className="mx-16 border-t border-[hsl(var(--resume-divider))]" />
+      <div className="mx-16 border-t border-gray-800" />
 
       {/* Body */}
       <div className="flex flex-1 px-16 pt-10 pb-12">
@@ -48,7 +48,7 @@ const SimpleModel = ({ cv }: ResumeProps) => {
           )}
 
           {/* Education */}
-          {education?.length > 0 && (
+          {education && education.length > 0 && (
             <div className="mb-10">
               <SectionHeading>EDUCATION</SectionHeading>
               <div className="mt-5 space-y-6">
@@ -72,7 +72,7 @@ const SimpleModel = ({ cv }: ResumeProps) => {
           )}
 
           {/* Skills */}
-          {skills?.length > 0 && (
+          {skills && skills.length > 0 && (
             <div className="mb-10">
               <SectionHeading>S K I L L S</SectionHeading>
               <ul className="mt-5 space-y-2 text-sm text-resume-body">
@@ -84,7 +84,7 @@ const SimpleModel = ({ cv }: ResumeProps) => {
             </div>
           )}
 
-          {languages?.length > 0 && (
+          {languages && languages.length > 0 && (
             <div>
               <SectionHeading>LANGUAGES</SectionHeading>
               <ul className="mt-5 space-y-2 text-sm text-resume-body">
@@ -98,7 +98,7 @@ const SimpleModel = ({ cv }: ResumeProps) => {
         </div>
 
         {/* Vertical Divider */}
-        <div className="border-l border-[hsl(var(--resume-divider))] mx-0" />
+        <div className="border-l border-gray-800 mx-0" />
 
         {/* Right Column */}
         <div className="flex-1 pl-10">
@@ -113,7 +113,7 @@ const SimpleModel = ({ cv }: ResumeProps) => {
           )}
 
           {/* Work Experience */}
-          {experiences?.length > 0 && (
+          {experiences && experiences.length > 0 && (
             <div>
               <SectionHeading>WORK EXPERIENCE</SectionHeading>
               <div className="mt-5 space-y-8">

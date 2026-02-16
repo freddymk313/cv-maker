@@ -1,5 +1,17 @@
 .cv-theme {
   font-family: "Helvetica Neue", Arial, sans-serif;
+  
+  /* Use HEX colors to avoid Tailwind v4 converting to lab() */
+  --background: #f5f5f5;
+  --foreground: #1a1a1a;
+  --card: #ffffff;
+  
+  --resume-name: #1a1a1a;
+  --resume-heading: #1a1a1a;
+  --resume-body: #404040;
+  --resume-muted: #737373;
+  --resume-divider: #262626;
+  --resume-icon: #1a1a1a;
 }
 
 .cv-theme h1,
@@ -9,132 +21,5 @@
 .cv-theme h5,
 .cv-theme h6 {
   font-family: Georgia, serif;
-}
-
-.cv-theme {
-  --background: 0 0% 96%;
-  --foreground: 0 0% 10%;
-
-  --card: 0 0% 100%;
-  --card-foreground: 0 0% 10%;
-
-  --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 10%;
-
-  --primary: 0 0% 0%;
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 0 0% 96%;
-  --secondary-foreground: 0 0% 10%;
-
-  --muted: 0 0% 90%;
-  --muted-foreground: 0 0% 40%;
-
-  --accent: 0 0% 96%;
-  --accent-foreground: 0 0% 10%;
-
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 100%;
-
-  --border: 0 0% 80%;
-  --input: 0 0% 80%;
-  --ring: 0 0% 0%;
-
-  --radius: 0rem;
-
-  --sidebar-background: 0 0% 98%;
-  --sidebar-foreground: 240 5.3% 26.1%;
-  --sidebar-primary: 240 5.9% 10%;
-  --sidebar-primary-foreground: 0 0% 98%;
-  --sidebar-accent: 240 4.8% 95.9%;
-  --sidebar-accent-foreground: 240 5.9% 10%;
-  --sidebar-border: 220 13% 91%;
-  --sidebar-ring: 217.2 91.2% 59.8%;
-
-  --resume-name: 0 0% 10%;
-  --resume-heading: 0 0% 10%;
-  --resume-body: 0 0% 25%;
-  --resume-muted: 0 0% 45%;
-  --resume-divider: 0 0% 15%;
-  --resume-icon: 0 0% 10%;
-}
-
-.cv-theme.dark {
-  --background: 0 0% 10%;
-  --foreground: 0 0% 96%;
-  --card: 0 0% 15%;
-  --card-foreground: 0 0% 96%;
-  --popover: 0 0% 15%;
-  --popover-foreground: 0 0% 96%;
-  --primary: 0 0% 100%;
-  --primary-foreground: 0 0% 0%;
-  --secondary: 0 0% 20%;
-  --secondary-foreground: 0 0% 96%;
-  --muted: 0 0% 20%;
-  --muted-foreground: 0 0% 60%;
-  --accent: 0 0% 20%;
-  --accent-foreground: 0 0% 96%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 0 0% 100%;
-  --border: 0 0% 25%;
-  --input: 0 0% 25%;
-  --ring: 0 0% 100%;
-}
-
-/* .cv-theme {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.cv-theme .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-} */
-
-/* .cv-theme .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.cv-theme .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-} */
-
-/* @keyframes cv-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .cv-theme a:nth-of-type(2) .logo {
-    animation: cv-logo-spin infinite 20s linear;
-  }
-} */
-
-/* .cv-theme .card {
-  padding: 2em;
-}
-
-.cv-theme .read-the-docs {
-  color: #888;
-} */
-
-@theme {
-  --font-sans: "Helvetica Neue", Arial, sans-serif;
-  --font-heading: Georgia, serif;
-
-  --color-resume-name: hsl(var(--resume-name));
-  --color-resume-heading: hsl(var(--resume-heading));
-  --color-resume-body: hsl(var(--resume-body));
-  --color-resume-muted: hsl(var(--resume-muted));
-  --color-resume-divider: hsl(var(--resume-divider));
-  --color-resume-icon: hsl(var(--resume-icon));
 }
 

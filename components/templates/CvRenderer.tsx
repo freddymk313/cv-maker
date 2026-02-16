@@ -20,7 +20,8 @@ export default function CvRenderer({ cv }: { cv: any }) {
       //   minHeight: "29.7cm",
       //   height: "fit-content" 
       // }}
-      className="min-h-screen bg-background py-10 flex justify-center"
+      className="min-h-[100vh] py-10 flex justify-center"
+      style={{ backgroundColor: '#f5f5f5' }}
     >
       {template === "classic" && <ClassicTemplate data={cv} />}
       {template === "modern" && <SimpleModel cv={cv} />}
