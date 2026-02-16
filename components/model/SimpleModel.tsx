@@ -1,3 +1,4 @@
+import "./../css/cv-theme.css";
 import { CvType } from "@/types/CvType";
 import { Phone, Mail, MapPin, Globe } from "lucide-react";
 // import { CvType } from "@/types"; // Crée un type TS basé sur ton modèle Mongoose

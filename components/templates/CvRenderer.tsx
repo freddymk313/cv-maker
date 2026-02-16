@@ -1,12 +1,12 @@
 // src/components/cv/templates/CvRenderer.tsx
 import Resume from "../Resume";
-import ResumeTree from "../SimpleModel";
+import ResumeTree from "../model/SimpleModel";
 import ResumeTwo from "../ResumeTwo";
 import BenjaminLeroyTemplate from "./BenjaminLeroyTemplate";
 import ClassicTemplate from "./ClassicTemplate";
 import ModernTemplate from "./ModernTemplate";
 import SimpleModernTemplate from "./SimpleModernTemplate";
-import SimpleModel from "../SimpleModel";
+import SimpleModel from "../model/SimpleModel";
 
 export default function CvRenderer({ cv }: { cv: any }) {
   const template = cv.templateId || "classic";
