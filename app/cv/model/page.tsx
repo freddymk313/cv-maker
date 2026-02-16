@@ -1,3 +1,4 @@
+import "./cv-theme.css";
 import Resume from "@/components/Resume";
 
 const ModelPage = () => {

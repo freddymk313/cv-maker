@@ -8,13 +8,13 @@ const Resume = () => {
         <h1 className="text-resume-name font-light tracking-[0.45em] text-5xl leading-tight">
           P E D R O
         </h1>
-        <h1 className="text-resume-name font-bold tracking-[0.35em] text-5xl leading-tight mt-1">
+        <h1 className="text-resume-name font-bold tracking-[0.32em] text-5xl leading-tight mt-1">
           F E R N A N D E S
         </h1>
       </header>
 
       {/* Divider */}
-      <div className="mx-16 border-t border-resume-divider" />
+      <div className="mx-16 border-t *border-resume-divider border-[hsl(var(--resume-divider))]" />
 
       {/* Body */}
       <div className="flex flex-1 px-16 pt-10 pb-12">
@@ -58,12 +58,12 @@ const Resume = () => {
               <li>Visual Art</li>
               <li>Animation</li>
             </ul>
-            <div className="mt-8 w-20 border-t border-resume-divider" />
+            <div className="mt-8 w-20 border-t border-[hsl(var(--resume-divider))]" />
           </div>
         </div>
 
         {/* Vertical Divider */}
-        <div className="border-l border-resume-divider mx-0" />
+        <div className="border-l border-[hsl(var(--resume-divider))] mx-0" />
 
         {/* Right Column */}
         <div className="flex-1 pl-10">
