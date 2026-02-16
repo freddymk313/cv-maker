@@ -1,11 +1,12 @@
 // src/components/cv/templates/CvRenderer.tsx
 import Resume from "../Resume";
-import ResumeTree from "../ResumeTree";
+import ResumeTree from "../SimpleModel";
 import ResumeTwo from "../ResumeTwo";
 import BenjaminLeroyTemplate from "./BenjaminLeroyTemplate";
 import ClassicTemplate from "./ClassicTemplate";
 import ModernTemplate from "./ModernTemplate";
 import SimpleModernTemplate from "./SimpleModernTemplate";
+import SimpleModel from "../SimpleModel";
 
 export default function CvRenderer({ cv }: { cv: any }) {
   const template = cv.templateId || "classic";
@@ -22,7 +23,7 @@ export default function CvRenderer({ cv }: { cv: any }) {
       className="min-h-screen bg-background py-10 flex justify-center"
     >
       {template === "classic" && <ClassicTemplate data={cv} />}
-      {template === "modern" && <ResumeTree cv={cv} />}
+      {template === "modern" && <SimpleModel cv={cv} />}
       {template === "creative" && <ModernTemplate data={cv} />}
     </div>
   );

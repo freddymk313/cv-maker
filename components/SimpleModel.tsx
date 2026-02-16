@@ -6,7 +6,9 @@ interface ResumeProps {
   cv: CvType;
 }
 
-const ResumeTree = ({ cv }: ResumeProps) => {
+const SimpleModel = ({ cv }: ResumeProps) => {
+    console.log("CV data in ResumeTree:", cv); // Debug : vérifier les données reçues
+
   const { personalInfo, experiences, education, skills } = cv;
 
   const contacts = [
@@ -199,4 +201,4 @@ const WorkItem = ({
   </div>
 );
 
-export default ResumeTree
+export default SimpleModel;
