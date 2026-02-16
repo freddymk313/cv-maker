@@ -1,15 +1,12 @@
 import "./../css/cv-theme.css";
 import { CvType } from "@/types/CvType";
 import { Phone, Mail, MapPin, Globe } from "lucide-react";
-// import { CvType } from "@/types"; // Crée un type TS basé sur ton modèle Mongoose
 
 interface ResumeProps {
   cv: CvType;
 }
 
 const SimpleModel = ({ cv }: ResumeProps) => {
-    console.log("CV data in ResumeTree:", cv); // Debug : vérifier les données reçues
-
   const { personalInfo, experiences, education, skills, languages } = cv;
 
   const contacts = [
@@ -17,22 +14,25 @@ const SimpleModel = ({ cv }: ResumeProps) => {
     { icon: <Mail size={14} />, text: personalInfo.email },
     { icon: <MapPin size={14} />, text: personalInfo.address },
     { icon: <Globe size={14} />, text: personalInfo.linkedin || personalInfo.github || personalInfo.website },
-  ].filter((c) => c.text); // Filtrer les infos vides
+  ].filter((c) => c.text);
 
   return (
-    <div className="cv-theme w-[794px] min-h-[1123px] bg-card mx-auto shadow-lg flex flex-col">
+    /* Remplacement bg-card par #ffffff */
+    <div className="w-[794px] min-h-[1123px] mx-auto shadow-lg flex flex-col" style={{ backgroundColor: '#ffffff' }}>
+      
       {/* Header - Name */}
       <header className="pt-14 pb-10 px-16 text-right">
-        <h1 className="text-resume-name font-light tracking-[0.45em] text-4xl leading-tight">
+        {/* Remplacement text-resume-name par #1a1a1a */}
+        <h1 className="font-light tracking-[0.45em] text-4xl leading-tight" style={{ color: '#1a1a1a' }}>
           {personalInfo.firstName.toUpperCase().split("").join(" ")}
         </h1>
-        <h1 className="text-resume-name font-bold tracking-[0.32em] text-4xl leading-tight mt-1">
+        <h1 className="font-bold tracking-[0.32em] text-4xl leading-tight mt-1" style={{ color: '#1a1a1a' }}>
           {personalInfo.lastName.toUpperCase().split("").join(" ")}
         </h1>
       </header>
 
       {/* Divider */}
-      <div className="mx-16 border-t border-gray-800" />
+      <div className="mx-16 border-t" style={{ borderColor: '#262626' }} />
 
       {/* Body */}
       <div className="flex flex-1 px-16 pt-10 pb-12">
@@ -75,30 +75,28 @@ const SimpleModel = ({ cv }: ResumeProps) => {
           {skills && skills.length > 0 && (
             <div className="mb-10">
               <SectionHeading>S K I L L S</SectionHeading>
-              <ul className="mt-5 space-y-2 text-sm text-resume-body">
+              <ul className="mt-5 space-y-2 text-sm leading-relaxed" style={{ color: '#404040' }}>
                 {skills.map((s, i) => (
                   <li key={i}>{s.name}</li>
                 ))}
               </ul>
-              {/* <div className="mt-8 w-20 border-t border-[hsl(var(--resume-divider))]" /> */}
             </div>
           )}
 
           {languages && languages.length > 0 && (
             <div>
               <SectionHeading>LANGUAGES</SectionHeading>
-              <ul className="mt-5 space-y-2 text-sm text-resume-body">
+              <ul className="mt-5 space-y-2 text-sm leading-relaxed" style={{ color: '#404040' }}>
                 {languages.map((l, i) => (
                   <li key={i}>{l.language}</li>
                 ))}
               </ul>
-              {/* <div className="mt-8 w-20 border-t border-[hsl(var(--resume-divider))]" /> */}
             </div>
           )}
         </div>
 
-        {/* Vertical Divider */}
-        <div className="border-l border-gray-800 mx-0" />
+        {/* Vertical Divider - Couleur Hex fixe */}
+        <div className="border-l mx-0" style={{ borderColor: '#262626' }} />
 
         {/* Right Column */}
         <div className="flex-1 pl-10">
@@ -106,7 +104,7 @@ const SimpleModel = ({ cv }: ResumeProps) => {
           {personalInfo.bio && (
             <div className="mb-10">
               <SectionHeading>PROFILE</SectionHeading>
-              <p className="mt-5 text-sm text-resume-body leading-relaxed">
+              <p className="mt-5 text-sm leading-relaxed" style={{ color: '#404040' }}>
                 {personalInfo.bio}
               </p>
             </div>
@@ -134,7 +132,7 @@ const SimpleModel = ({ cv }: ResumeProps) => {
                         : ""
                     }
                     description={exp.description || ""}
-                    bullets={[]} // si tu veux, tu peux ajouter un champ bullets dans le modèle
+                    bullets={[]} 
                   />
                 ))}
               </div>
@@ -146,9 +144,10 @@ const SimpleModel = ({ cv }: ResumeProps) => {
   );
 };
 
-// --- Components (inchangés) ---
+/* --- Sous-composants avec couleurs supportées --- */
+
 const SectionHeading = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="text-resume-heading font-bold text-base tracking-widest">
+  <h2 className="font-bold text-base tracking-widest uppercase" style={{ color: '#1a1a1a' }}>
     {children}
   </h2>
 );
@@ -160,8 +159,8 @@ const ContactItem = ({
   icon: React.ReactNode;
   text: string;
 }) => (
-  <div className="flex items-center gap-3 text-sm text-resume-body">
-    <span className="text-resume-icon">{icon}</span>
+  <div className="flex items-center gap-3 text-sm" style={{ color: '#404040' }}>
+    <span style={{ color: '#1a1a1a' }}>{icon}</span>
     <span>{text}</span>
   </div>
 );
@@ -178,10 +177,10 @@ const EducationItem = ({
   years: string;
 }) => (
   <div>
-    <p className="text-sm font-semibold text-resume-heading">{university}</p>
-    <p className="text-sm text-resume-muted">{location}</p>
-    <p className="text-sm text-resume-muted">{degree}</p>
-    <p className="text-sm text-resume-muted">{years}</p>
+    <p className="text-sm font-semibold" style={{ color: '#1a1a1a' }}>{university}</p>
+    <p className="text-sm" style={{ color: '#737373' }}>{location}</p>
+    <p className="text-sm" style={{ color: '#737373' }}>{degree}</p>
+    <p className="text-sm" style={{ color: '#737373' }}>{years}</p>
   </div>
 );
 
@@ -199,13 +198,13 @@ const WorkItem = ({
   bullets: string[];
 }) => (
   <div>
-    <p className="text-sm font-bold text-resume-heading">{title}</p>
-    <p className="text-sm text-resume-muted mt-0.5">
+    <p className="text-sm font-bold uppercase" style={{ color: '#1a1a1a' }}>{title}</p>
+    <p className="text-sm mt-0.5" style={{ color: '#737373' }}>
       {company} | {years}
     </p>
-    <p className="text-sm text-resume-body leading-relaxed mt-2">{description}</p>
+    <p className="text-sm leading-relaxed mt-2" style={{ color: '#404040' }}>{description}</p>
     {bullets?.length > 0 && (
-      <ul className="mt-2 space-y-1 list-disc list-outside pl-5 text-sm text-resume-body leading-relaxed">
+      <ul className="mt-2 space-y-1 list-disc list-outside pl-5 text-sm leading-relaxed" style={{ color: '#404040' }}>
         {bullets.map((b, i) => (
           <li key={i}>{b}</li>
         ))}

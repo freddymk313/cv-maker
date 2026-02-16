@@ -1,8 +1,8 @@
-.cv-theme {
-  font-family: "Helvetica Neue", Arial, sans-serif;
+/* .cv-theme {
+  font-family: "Helvetica Neue", Arial, sans-serif; */
   
   /* Use HEX colors to avoid Tailwind v4 converting to lab() */
-  --background: #f5f5f5;
+  /* --background: #f5f5f5;
   --foreground: #1a1a1a;
   --card: #ffffff;
   
@@ -22,4 +22,27 @@
 .cv-theme h6 {
   font-family: Georgia, serif;
 }
+ */
 
+ /* src/components/css/cv-theme.css */
+.cv-theme {
+  /* On force le rendu en HEX pour html2canvas */
+  --resume-name: #1a1a1a;
+  --resume-heading: #1a1a1a;
+  --resume-body: #404040;
+  --resume-muted: #737373;
+  --resume-divider: #e5e7eb;
+  --resume-icon: #1a1a1a;
+  --card: #ffffff;
+}
+
+@theme {
+  /* On utilise des valeurs directes sans passer par hsl() */
+  --color-resume-name: var(--resume-name);
+  --color-resume-heading: var(--resume-heading);
+  --color-resume-body: var(--resume-body);
+  --color-resume-muted: var(--resume-muted);
+  --color-resume-divider: var(--resume-divider);
+  --color-resume-icon: var(--resume-icon);
+  --color-card: var(--card);
+}
