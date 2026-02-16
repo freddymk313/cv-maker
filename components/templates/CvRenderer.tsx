@@ -1,5 +1,6 @@
 // src/components/cv/templates/CvRenderer.tsx
 import Resume from "../Resume";
+import ResumeTwo from "../ResumeTwo";
 import BenjaminLeroyTemplate from "./BenjaminLeroyTemplate";
 import ClassicTemplate from "./ClassicTemplate";
 import ModernTemplate from "./ModernTemplate";
@@ -20,7 +21,7 @@ export default function CvRenderer({ cv }: { cv: any }) {
       className="min-h-screen bg-background py-10 flex justify-center"
     >
       {template === "classic" && <ClassicTemplate data={cv} />}
-      {template === "modern" && <Resume />}
+      {template === "modern" && <ResumeTwo data={cv} />}
       {template === "creative" && <ModernTemplate data={cv} />}
     </div>
   );
