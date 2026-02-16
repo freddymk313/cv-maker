@@ -10,13 +10,13 @@ interface ResumeProps {
 const SimpleModel = ({ cv }: ResumeProps) => {
     console.log("CV data in ResumeTree:", cv); // Debug : vérifier les données reçues
 
-  const { personalInfo, experiences, education, skills } = cv;
+  const { personalInfo, experiences, education, skills, languages } = cv;
 
   const contacts = [
     { icon: <Phone size={14} />, text: personalInfo.phone },
     { icon: <Mail size={14} />, text: personalInfo.email },
     { icon: <MapPin size={14} />, text: personalInfo.address },
-    { icon: <Globe size={14} />, text: personalInfo.website },
+    { icon: <Globe size={14} />, text: personalInfo.linkedin || personalInfo.github || personalInfo.website },
   ].filter((c) => c.text); // Filtrer les infos vides
 
   return (
@@ -73,14 +73,26 @@ const SimpleModel = ({ cv }: ResumeProps) => {
 
           {/* Skills */}
           {skills?.length > 0 && (
-            <div>
+            <div className="mb-10">
               <SectionHeading>S K I L L S</SectionHeading>
               <ul className="mt-5 space-y-2 text-sm text-resume-body">
                 {skills.map((s, i) => (
                   <li key={i}>{s.name}</li>
                 ))}
               </ul>
-              <div className="mt-8 w-20 border-t border-[hsl(var(--resume-divider))]" />
+              {/* <div className="mt-8 w-20 border-t border-[hsl(var(--resume-divider))]" /> */}
+            </div>
+          )}
+
+          {languages?.length > 0 && (
+            <div>
+              <SectionHeading>LANGUAGES</SectionHeading>
+              <ul className="mt-5 space-y-2 text-sm text-resume-body">
+                {languages.map((l, i) => (
+                  <li key={i}>{l.language}</li>
+                ))}
+              </ul>
+              {/* <div className="mt-8 w-20 border-t border-[hsl(var(--resume-divider))]" /> */}
             </div>
           )}
         </div>
