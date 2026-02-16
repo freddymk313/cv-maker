@@ -2,7 +2,7 @@ import { Phone, Mail, MapPin, Globe } from "lucide-react";
 
 const Resume = () => {
   return (
-    <div className="w-[794px] min-h-[1123px] bg-card mx-auto shadow-lg flex flex-col">
+    <div className="cv-theme w-[794px] min-h-[1123px] bg-card mx-auto shadow-lg flex flex-col">
       {/* Header - Name */}
       <header className="pt-14 pb-10 px-16 text-right">
         <h1 className="text-resume-name font-light tracking-[0.45em] text-5xl leading-tight">

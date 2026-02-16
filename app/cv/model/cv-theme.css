@@ -1,4 +1,17 @@
 .cv-theme {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.cv-theme h1,
+.cv-theme h2,
+.cv-theme h3,
+.cv-theme h4,
+.cv-theme h5,
+.cv-theme h6 {
+  font-family: Georgia, serif;
+}
+
+.cv-theme {
   --background: 0 0% 96%;
   --foreground: 0 0% 10%;
 
@@ -68,7 +81,7 @@
   --ring: 0 0% 100%;
 }
 
-.cv-theme {
+/* .cv-theme {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -80,15 +93,15 @@
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
-}
+} */
 
-.cv-theme .logo:hover {
+/* .cv-theme .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
 
 .cv-theme .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
-}
+} */
 
 @keyframes cv-logo-spin {
   from {
@@ -114,6 +127,9 @@
 }
 
 @theme {
+  --font-sans: "Helvetica Neue", Arial, sans-serif;
+  --font-heading: Georgia, serif;
+
   --color-resume-name: hsl(var(--resume-name));
   --color-resume-heading: hsl(var(--resume-heading));
   --color-resume-body: hsl(var(--resume-body));
