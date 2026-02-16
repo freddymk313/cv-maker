@@ -5,10 +5,10 @@ const Resume = () => {
     <div className="cv-theme w-[794px] min-h-[1123px] bg-card mx-auto shadow-lg flex flex-col">
       {/* Header - Name */}
       <header className="pt-14 pb-10 px-16 text-right">
-        <h1 className="text-resume-name font-light tracking-[0.45em] text-5xl leading-tight">
+        <h1 className="text-resume-name font-light tracking-[0.45em] text-4xl leading-tight">
           P E D R O
         </h1>
-        <h1 className="text-resume-name font-bold tracking-[0.32em] text-5xl leading-tight mt-1">
+        <h1 className="text-resume-name font-bold tracking-[0.32em] text-4xl leading-tight mt-1">
           F E R N A N D E S
         </h1>
       </header>

@@ -103,7 +103,7 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 } */
 
-@keyframes cv-logo-spin {
+/* @keyframes cv-logo-spin {
   from {
     transform: rotate(0deg);
   }
@@ -116,15 +116,15 @@
   .cv-theme a:nth-of-type(2) .logo {
     animation: cv-logo-spin infinite 20s linear;
   }
-}
+} */
 
-.cv-theme .card {
+/* .cv-theme .card {
   padding: 2em;
 }
 
 .cv-theme .read-the-docs {
   color: #888;
-}
+} */
 
 @theme {
   --font-sans: "Helvetica Neue", Arial, sans-serif;
