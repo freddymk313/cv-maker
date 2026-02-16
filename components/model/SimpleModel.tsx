@@ -26,7 +26,7 @@ const SimpleModel = ({ cv }: ResumeProps) => {
         <h1 className="font-light tracking-[0.45em] text-4xl leading-tight" style={{ color: '#1a1a1a' }}>
           {personalInfo.firstName.toUpperCase().split("").join(" ")}
         </h1>
-        <h1 className="font-bold tracking-[0.32em] text-4xl leading-tight mt-1" style={{ color: '#1a1a1a' }}>
+        <h1 className="font-bold tracking-[0.20em] text-4xl leading-tight mt-1" style={{ color: '#1a1a1a' }}>
           {personalInfo.lastName.toUpperCase().split("").join(" ")}
         </h1>
       </header>
