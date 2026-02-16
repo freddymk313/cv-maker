@@ -1,32 +1,6 @@
-/* .cv-theme {
-  font-family: "Helvetica Neue", Arial, sans-serif; */
-  
-  /* Use HEX colors to avoid Tailwind v4 converting to lab() */
-  /* --background: #f5f5f5;
-  --foreground: #1a1a1a;
-  --card: #ffffff;
-  
-  --resume-name: #1a1a1a;
-  --resume-heading: #1a1a1a;
-  --resume-body: #404040;
-  --resume-muted: #737373;
-  --resume-divider: #262626;
-  --resume-icon: #1a1a1a;
-}
 
-.cv-theme h1,
-.cv-theme h2,
-.cv-theme h3,
-.cv-theme h4,
-.cv-theme h5,
-.cv-theme h6 {
-  font-family: Georgia, serif;
-}
- */
-
- /* src/components/css/cv-theme.css */
 .cv-theme {
-  /* On force le rendu en HEX pour html2canvas */
+  font-family: "Helvetica Neue", Arial, sans-serif;
   --resume-name: #1a1a1a;
   --resume-heading: #1a1a1a;
   --resume-body: #404040;
@@ -36,13 +10,11 @@
   --card: #ffffff;
 }
 
-@theme {
-  /* On utilise des valeurs directes sans passer par hsl() */
-  --color-resume-name: var(--resume-name);
-  --color-resume-heading: var(--resume-heading);
-  --color-resume-body: var(--resume-body);
-  --color-resume-muted: var(--resume-muted);
-  --color-resume-divider: var(--resume-divider);
-  --color-resume-icon: var(--resume-icon);
-  --color-card: var(--card);
+.cv-theme h1,
+.cv-theme h2,
+.cv-theme h3,
+.cv-theme h4,
+.cv-theme h5,
+.cv-theme h6 {
+  font-family: Georgia, serif;
 }

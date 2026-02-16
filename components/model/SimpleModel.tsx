@@ -18,7 +18,7 @@ const SimpleModel = ({ cv }: ResumeProps) => {
 
   return (
     /* Remplacement bg-card par #ffffff */
-    <div className="w-[794px] min-h-[1123px] mx-auto shadow-lg flex flex-col" style={{ backgroundColor: '#ffffff' }}>
+    <div className="cv-theme w-[794px] min-h-[1123px] mx-auto shadow-lg flex flex-col" style={{ backgroundColor: '#ffffff' }}>
       
       {/* Header - Name */}
       <header className="pt-14 pb-10 px-16 text-right">
@@ -74,7 +74,7 @@ const SimpleModel = ({ cv }: ResumeProps) => {
           {/* Skills */}
           {skills && skills.length > 0 && (
             <div className="mb-10">
-              <SectionHeading>S K I L L S</SectionHeading>
+              <SectionHeading>SKILLS</SectionHeading>
               <ul className="mt-5 space-y-2 text-sm leading-relaxed" style={{ color: '#404040' }}>
                 {skills.map((s, i) => (
                   <li key={i}>{s.name}</li>
