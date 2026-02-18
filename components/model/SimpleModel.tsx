@@ -405,11 +405,12 @@ const SimpleModel = ({ cv }: ResumeProps) => {
       {/* Body Container */}
       <div className="relative px-16 pt-10 pb-12">
         {/* Ligne Verticale - On utilise une bordure sur un div absolu qui s'adapte à la hauteur */}
-        <div className="absolute top-0 bottom-0 left-[304px] border-l border-[#262626]" />
+        {/* <div className="absolute top-0 bottom-0 left-[304px] border-l border-[#262626]" /> */}
 
         <div className="flex w-full">
           {/* Colonne Gauche */}
-          <div className="w-[240px] pr-10 flex-shrink-0 relative z-10">
+          {/* <div className="w-[240px] pr-10 flex-shrink-0 relative z-10"> */}
+          <div className="w-[240px] pr-10 border-r border-[#262626]">
             {contacts.length > 0 && (
               <div className="space-y-3 mb-10">
                 {contacts.map((c, i) => (
@@ -473,7 +474,7 @@ const SimpleModel = ({ cv }: ResumeProps) => {
           </div>
 
           {/* Colonne Droite */}
-          <div className="flex-1 pl-10 *relative *z-10">
+          <div className="flex-1 pl-10">
             {personalInfo.bio && (
               <div className="mb-10">
                 <SectionHeading>PROFILE</SectionHeading>
