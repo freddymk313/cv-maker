@@ -1,0 +1,37 @@
+.cv-theme-modern {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  --resume-name: #1a1a1a;
+  --resume-heading: #1a1a1a;
+  --resume-body: #404040;
+  --resume-muted: #737373;
+  --resume-divider: #e5e7eb;
+  --resume-icon: #1a1a1a;
+  --card: #ffffff;
+
+   --background: #ffffff;
+  --foreground: #1a1a1a;
+}
+
+.cv-theme-modern h1,
+.cv-theme-modern h2,
+.cv-theme-modern h3,
+.cv-theme-modern h4,
+.cv-theme-modern h5,
+.cv-theme-modern h6 {
+  font-family: Georgia, serif;
+}
+
+.cv-page-container {
+  background-color: #ffffff;
+  width: 794px;
+  margin: auto;
+  position: relative;
+  /* Crée une ligne grise tous les 1123px (hauteur A4) */
+  /* background-image: linear-gradient(to bottom, transparent 1122px, #e5e7eb 1122px, #e5e7eb 1125px, transparent 1125px); */
+  background-size: 100% 1123px;
+}
+
+.break-inside-avoid {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}

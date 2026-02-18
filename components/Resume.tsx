@@ -1,190 +1,163 @@
-import { Phone, Mail, MapPin, Globe } from "lucide-react";
+import { forwardRef } from "react";
+// import profilePhoto from "@/assets/profile-photo.png";
 
-const Resume = () => {
+const Resume = forwardRef<HTMLDivElement>((_, ref) => {
   return (
-    <div className="cv-theme w-[794px] min-h-[1123px] bg-card mx-auto shadow-lg flex flex-col">
-      {/* Header - Name */}
-      <header className="pt-14 pb-10 px-16 text-right">
-        <h1 className="text-resume-name font-light tracking-[0.45em] text-4xl leading-tight">
-          P E D R O
-        </h1>
-        <h1 className="text-resume-name font-bold tracking-[0.32em] text-4xl leading-tight mt-1">
-          F E R N A N D E S
-        </h1>
-      </header>
+    <div ref={ref} className="w-[794px] h-[1123px] bg-white mx-auto shadow-lg flex overflow-hidden font-sans">
+      
+      {/* Sidebar Gauche (Noire) */}
+      <div className="w-[300px] bg-black text-white flex-shrink-0 flex flex-col">
+        {/* Photo de profil */}
+        <div className="w-full h-[320px] overflow-hidden">
+          <img
+            src="https://via.placeholder.com/300x300?text=Photo" // Remplacez par profilePhoto si vous avez une image locale
+            alt="Benjamin Leroy"
+            className="w-full h-full object-cover grayscale"
+          />
+        </div>
 
-      {/* Divider */}
-      <div className="mx-16 border-t *border-resume-divider border-[hsl(var(--resume-divider))]" />
+        {/* Coordonnées (Sans icônes, texte simple) */}
+        <div className="px-10 pt-12 space-y-1.5 text-[13px] font-light opacity-90">
+          <p>Paris, France</p>
+          <p>hello@reallygreatsite.com</p>
+          <p>+123-456-7890</p>
+          <p>www.reallygreatsite.com</p>
+        </div>
 
-      {/* Body */}
-      <div className="flex flex-1 px-16 pt-10 pb-12">
-        {/* Left Column */}
-        <div className="w-[240px] pr-10 flex-shrink-0">
-          {/* Contact */}
-          <div className="space-y-3 mb-10">
-            <ContactItem icon={<Phone size={14} />} text="+123-456-7890" />
-            <ContactItem
-              icon={<Mail size={14} />}
-              text="hello@reallygreatsite.com"
-            />
-            <ContactItem
-              icon={<MapPin size={14} />}
-              text="123 Anywhere St., Any City"
-            />
-            <ContactItem
-              icon={<Globe size={14} />}
-              text="www.reallygreatsite.com"
-            />
-          </div>
-
-          {/* Education */}
-          <div className="mb-10">
-            <SectionHeading>EDUCATION</SectionHeading>
-            <div className="mt-5 space-y-6">
-              <EducationItem
-                university="UNIVERSITY NAME HERE"
-                location="University Location"
-                degree="Degree Name"
-                years="2011 - 2015"
-              />
-              <EducationItem
-                university="UNIVERSITY NAME HERE"
-                location="University Location"
-                degree="Degree Name"
-                years="2011 - 2015"
-              />
-            </div>
-          </div>
-
-          {/* Skills */}
-          <div>
-            <SectionHeading>S K I L L S</SectionHeading>
-            <ul className="mt-5 space-y-2 text-sm text-resume-body">
-              <li>Editing</li>
-              <li>Layouting</li>
-              <li>Communication</li>
-              <li>Teamwork</li>
-              <li>Visual Art</li>
-              <li>Animation</li>
-            </ul>
-            <div className="mt-8 w-20 border-t border-[hsl(var(--resume-divider))]" />
+        {/* Section Langues */}
+        <div className="px-10 pt-12">
+          <SidebarHeading>LANGUES</SidebarHeading>
+          <div className="mt-4 space-y-1 text-[13px] font-light opacity-90">
+            <p>Anglais - courant</p>
+            <p>Espagnol - intermédiaire</p>
           </div>
         </div>
 
-        {/* Vertical Divider */}
-        <div className="border-l border-[hsl(var(--resume-divider))] mx-0" />
-
-        {/* Right Column */}
-        <div className="flex-1 pl-10">
-          {/* Profile */}
-          <div className="mb-10">
-            <SectionHeading>PROFILE</SectionHeading>
-            <p className="mt-5 text-sm text-resume-body leading-relaxed">
-              A visual artist creates works of art using a variety of materials.
-              As a visual artist, your duties may be to draw images, work with
-              paint, develop murals, design in 3D, or create art with mixed
-              media.
-            </p>
+        {/* Section Compétences */}
+        <div className="px-10 pt-12">
+          <SidebarHeading>COMPÉTENCES</SidebarHeading>
+          <div className="mt-4 space-y-3 text-[13px] font-light opacity-90 leading-snug">
+            <p>Langages de programmation</p>
+            <p>Bases de données</p>
+            <p>Systèmes d'exploitation</p>
+            <p>Excellentes compétences en résolution de problèmes et en dépannage</p>
           </div>
+        </div>
 
-          {/* Work Experience */}
-          <div>
-            <SectionHeading>WORK EXPERIENCE</SectionHeading>
-            <div className="mt-5 space-y-8">
-              <WorkItem
-                title="ENTER YOUR JOB POSITION HERE"
-                company="Cmpany Name"
-                years="2015 - 2018"
-                description="creates works of art using a variety of materials. As a visual artist, your duties may be to draw images, work with paint, develop murals, design in 3D"
-                bullets={[
-                  "Create artwork based on the creative concept decided for the exhibition.",
-                  "Develop a creative concept for exhibit or sale.",
-                  "Display completed artwork and oversee installation of artwork at venue or event.",
-                ]}
-              />
-              <WorkItem
-                title="ENTER YOUR JOB POSITION HERE"
-                company="Cmpany Name"
-                years="2015 - 2018"
-                description="creates works of art using a variety of materials. As a visual artist, your duties may be to draw images, work with paint, develop murals, design in 3D"
-                bullets={[
-                  "Create artwork based on the creative concept decided for the exhibition.",
-                  "Develop a creative concept for exhibit or sale.",
-                  "Display completed artwork and oversee installation of artwork at venue or event.",
-                ]}
-              />
-            </div>
+        {/* Section Centres d'intérêts */}
+        <div className="px-10 pt-12">
+          <SidebarHeading>CENTRES D'INTÉRÊTS</SidebarHeading>
+          <div className="mt-4 space-y-1 text-[13px] font-light opacity-90">
+            <p>Technologie</p>
+            <p>Photographie</p>
+            <p>Lecture</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Colonne Droite (Contenu) */}
+      <div className="flex-1 px-12 pt-16 pb-12 flex flex-col bg-white">
+        
+        {/* Nom et Prénom */}
+        <header>
+          <h1 className="text-black font-black text-[56px] leading-[0.9] tracking-tighter">
+            BENJAMIN<br />LEROY
+          </h1>
+          <p className="mt-6 text-[#7d94ad] font-bold text-base tracking-[0.1em] uppercase">
+            DÉVELOPPEUR WEB
+          </p>
+        </header>
+
+        {/* Profil / Résumé */}
+        <div className="mt-6">
+          <p className="text-[13px] text-gray-700 leading-relaxed max-w-[90%]">
+            Développeur web autonome et rigoureux, capable de concevoir, maintenir et optimiser
+            des solutions digitales adaptées aux besoins utilisateurs, en respectant les délais
+            et la qualité attendue.
+          </p>
+        </div>
+
+        {/* Expériences Professionnelles */}
+        <div className="mt-12">
+          <SectionHeading>EXPÉRIENCES PROFESSIONNELLES</SectionHeading>
+          <div className="mt-6 space-y-8">
+            <WorkItem
+              title="DÉVELOPPEUR FULL STACK"
+              details="Messagem, Paris, France | Février 2017 - Présent"
+              bullets={[
+                "Développement et maintenance d'applications web.",
+                "Collaboration avec les équipes de conception afin de créer des interfaces utilisateur intuitives.",
+                "Optimisation des performances des applications et résolution des bugs.",
+                "Mise en place de tests automatisés pour garantir la qualité du code.",
+              ]}
+            />
+            <WorkItem
+              title="ADMINISTRATEUR SYSTÈME ET RÉSEAU"
+              details="Audio Stream - Lyon, France | Août 2013 - Janvier 2017"
+              bullets={[
+                "Administration des infrastructures réseau et des serveurs.",
+                "Implémentation de solutions de sécurité.",
+                "Suivi des performances système et résolution des problèmes techniques.",
+                "Contribution à la planification et à l'exécution de projets d'infrastructure.",
+              ]}
+            />
+          </div>
+        </div>
+
+        {/* Formations */}
+        <div className="mt-12">
+          <SectionHeading>FORMATIONS</SectionHeading>
+          <div className="mt-6 space-y-5">
+            <EducationItem
+              degree="MASTER EN INFORMATIQUE"
+              school="École Amédé Autran, Paris, France | 2010 - 2012"
+            />
+            <EducationItem
+              degree="LICENCE EN INFORMATIQUE"
+              school="École Amédé Autran, Paris, France | 2007 - 2010"
+            />
           </div>
         </div>
       </div>
     </div>
   );
-};
+});
+
+Resume.displayName = "Resume";
+
+/* Composants Internes pour la structure */
 
 const SectionHeading = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="text-resume-heading font-bold text-base tracking-widest">
+  <h2 className="text-black font-black text-xl tracking-tight border-none mb-2">
     {children}
   </h2>
 );
 
-const ContactItem = ({
-  icon,
-  text,
-}: {
-  icon: React.ReactNode;
-  text: string;
-}) => (
-  <div className="flex items-center gap-3 text-sm text-resume-body">
-    <span className="text-resume-icon">{icon}</span>
-    <span>{text}</span>
-  </div>
+const SidebarHeading = ({ children }: { children: React.ReactNode }) => (
+  <h2 className="text-white font-black text-lg tracking-tight">
+    {children}
+  </h2>
 );
 
-const EducationItem = ({
-  university,
-  location,
-  degree,
-  years,
-}: {
-  university: string;
-  location: string;
-  degree: string;
-  years: string;
-}) => (
-  <div>
-    <p className="text-sm font-semibold text-resume-heading">{university}</p>
-    <p className="text-sm text-resume-muted">{location}</p>
-    <p className="text-sm text-resume-muted">{degree}</p>
-    <p className="text-sm text-resume-muted">{years}</p>
-  </div>
-);
-
-const WorkItem = ({
-  title,
-  company,
-  years,
-  description,
-  bullets,
-}: {
-  title: string;
-  company: string;
-  years: string;
-  description: string;
-  bullets: string[];
-}) => (
-  <div>
-    <p className="text-sm font-bold text-resume-heading">{title}</p>
-    <p className="text-sm text-resume-muted mt-0.5">
-      {company} | {years}
-    </p>
-    <p className="text-sm text-resume-body leading-relaxed mt-2">
-      {description}
-    </p>
-    <ul className="mt-2 space-y-1 list-disc list-outside pl-5 text-sm text-resume-body leading-relaxed">
-      {bullets.map((b, i) => (
-        <li key={i}>{b}</li>
+const WorkItem = ({ title, details, bullets }: { title: string; details: string; bullets: string[] }) => (
+  <div className="flex flex-col">
+    <h3 className="text-[14px] font-bold text-black uppercase tracking-tight">{title}</h3>
+    <p className="text-[12px] text-gray-400 mt-1 font-medium">{details}</p>
+    <ul className="mt-3 space-y-1.5">
+      {bullets.map((bullet, idx) => (
+        <li key={idx} className="text-[13px] text-gray-700 flex items-start">
+          <span className="mr-2 mt-1.5 w-1 h-1 bg-black rounded-full flex-shrink-0" />
+          {bullet}
+        </li>
       ))}
     </ul>
+  </div>
+);
+
+const EducationItem = ({ degree, school }: { degree: string; school: string }) => (
+  <div>
+    <h3 className="text-[14px] font-bold text-black uppercase tracking-tight">{degree}</h3>
+    <p className="text-[12px] text-gray-400 mt-1 font-medium">{school}</p>
   </div>
 );
 
