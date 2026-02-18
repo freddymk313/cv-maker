@@ -35,7 +35,13 @@ const SimpleModel = ({ cv }: ResumeProps) => {
       <div className="mx-16 border-t" style={{ borderColor: '#262626' }} />
 
       {/* Body */}
-      <div className="flex flex-1 px-16 pt-10 pb-12">
+      <div className="flex flex-1 px-16 pt-10 pb-12 relative">
+        {/* LIGNE VERTICALE : S'étire sur toute la hauteur du contenu (multi-pages) */}
+        <div 
+          className="absolute top-0 bottom-0 left-[304px] border-l" 
+          style={{ borderColor: '#262626' }} 
+        />
+
         {/* Left Column */}
         <div className="w-[240px] pr-10 flex-shrink-0">
           {/* Contact */}

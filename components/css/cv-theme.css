@@ -8,6 +8,9 @@
   --resume-divider: #e5e7eb;
   --resume-icon: #1a1a1a;
   --card: #ffffff;
+
+   --background: #ffffff;
+  --foreground: #1a1a1a;
 }
 
 .cv-theme h1,
@@ -17,4 +20,21 @@
 .cv-theme h5,
 .cv-theme h6 {
   font-family: Georgia, serif;
+}
+
+/* Éviter que le texte soit coupé entre deux pages */
+.break-inside-avoid {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Style pour simuler les pages dans l'aperçu web */
+.cv-page-container {
+  background-color: #ffffff;
+  width: 794px;
+  margin: auto;
+  position: relative;
+  /* Crée une ligne grise tous les 1123px (hauteur A4) */
+  background-image: linear-gradient(to bottom, transparent 1122px, #e5e7eb 1122px, #e5e7eb 1125px, transparent 1125px);
+  background-size: 100% 1123px;
 }
