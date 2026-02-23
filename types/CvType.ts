@@ -104,6 +104,11 @@ export interface PersonalInfoType {
   linkedin?: string;
   github?: string;
   website?: string;
+  location?: {
+    formatted?: string;
+    city?: string;
+    country?: string;
+  };
 }
 
 export interface CvType {

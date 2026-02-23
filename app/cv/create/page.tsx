@@ -59,7 +59,8 @@ export default function CreateCv() {
     fetchCv();
   }, []);
 
-  const nextStep = () => setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
+  const nextStep = () =>
+    setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
   const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
 
   // --- SAUVEGARDE ET MISE À JOUR LOCALE ---
@@ -74,7 +75,8 @@ export default function CreateCv() {
 
       const result = await response.json();
 
-      if (!response.ok) throw new Error(result.message || "Erreur de sauvegarde");
+      if (!response.ok)
+        throw new Error(result.message || "Erreur de sauvegarde");
 
       // Mise à jour de l'état local avec le CV complet retourné par l'API
       // Cela permet d'avoir les données fraîches pour l'étape suivante ou précédente
@@ -96,7 +98,9 @@ export default function CreateCv() {
     return (
       <div className="flex flex-col items-center justify-center min-h-100">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600 mb-4"></div>
-        <p className="text-gray-500 font-medium">Récupération de votre brouillon...</p>
+        <p className="text-gray-500 font-medium">
+          Récupération de votre brouillon...
+        </p>
       </div>
     );
   }
@@ -113,7 +117,10 @@ export default function CreateCv() {
             const isActive = currentStep === index;
 
             return (
-              <div key={step.id} className="relative z-10 flex flex-col items-center">
+              <div
+                key={step.id}
+                className="relative z-10 flex flex-col items-center"
+              >
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
                     isCompleted
@@ -123,9 +130,15 @@ export default function CreateCv() {
                         : "bg-white border-2 border-gray-300 text-gray-400"
                   }`}
                 >
-                  {isCompleted ? <Check className="w-5 h-5" /> : <Icon className="w-5 h-5" />}
+                  {isCompleted ? (
+                    <Check className="w-5 h-5" />
+                  ) : (
+                    <Icon className="w-5 h-5" />
+                  )}
                 </div>
-                <span className={`absolute -bottom-7 text-xs font-medium whitespace-nowrap ${isActive ? "text-blue-600" : "text-gray-500"}`}>
+                <span
+                  className={`absolute -bottom-7 text-xs font-medium whitespace-nowrap ${isActive ? "text-blue-600" : "text-gray-500"}`}
+                >
                   {step.label}
                 </span>
               </div>
@@ -140,14 +153,39 @@ export default function CreateCv() {
           <h2 className="text-2xl font-bold text-gray-800 tracking-tight">
             {steps[currentStep].label}
           </h2>
-          <p className="text-gray-500 text-sm">Veuillez remplir les informations ci-dessous.</p>
+          <p className="text-gray-500 text-sm">
+            Veuillez remplir les informations ci-dessous.
+          </p>
         </div>
 
         <div className="py-4">
-          {currentStep === 0 && (
+          {/* {currentStep === 0 && (
             <PersonalInfoForm
               initialData={cvData?.personalInfo}
               onSubmit={(data) => saveStepData("personalInfo", data)}
+              isLoading={isLoading}
+            />
+          )} */}
+
+          {currentStep === 0 && (
+            <PersonalInfoForm
+              initialData={cvData?.personalInfo}
+              onSubmit={(data) => {
+                const formattedLocation =
+                  data.location?.city && data.location?.country
+                    ? `${data.location.city}, ${data.location.country}`
+                    : "";
+
+                const enrichedData = {
+                  ...data,
+                  location: {
+                    ...data.location,
+                    formatted: formattedLocation,
+                  },
+                };
+
+                saveStepData("personalInfo", enrichedData);
+              }}
               isLoading={isLoading}
             />
           )}

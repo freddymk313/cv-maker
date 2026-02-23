@@ -10,8 +10,16 @@ interface Props {
   isLoading: boolean;
 }
 
-export default function PersonalInfoForm({ initialData, onSubmit, isLoading }: Props) {
-  const { register, handleSubmit, formState: { errors } } = useForm<PersonalInfoInput>({
+export default function PersonalInfoForm({
+  initialData,
+  onSubmit,
+  isLoading,
+}: Props) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<PersonalInfoInput>({
     resolver: zodResolver(personalInfoSchema),
     defaultValues: initialData || {},
   });
@@ -21,7 +29,9 @@ export default function PersonalInfoForm({ initialData, onSubmit, isLoading }: P
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Prénom */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Prénom</label>
+          <label className="block text-sm font-semibold text-gray-700 mb-1">
+            Prénom
+          </label>
           <input
             {...register("firstName")}
             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all ${
@@ -29,12 +39,18 @@ export default function PersonalInfoForm({ initialData, onSubmit, isLoading }: P
             }`}
             placeholder="Ex: Jean"
           />
-          {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName.message}</p>}
+          {errors.firstName && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.firstName.message}
+            </p>
+          )}
         </div>
 
         {/* Nom */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Nom</label>
+          <label className="block text-sm font-semibold text-gray-700 mb-1">
+            Nom
+          </label>
           <input
             {...register("lastName")}
             className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all ${
@@ -42,50 +58,120 @@ export default function PersonalInfoForm({ initialData, onSubmit, isLoading }: P
             }`}
             placeholder="Ex: Mbuyi"
           />
-          {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName.message}</p>}
+          {errors.lastName && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.lastName.message}
+            </p>
+          )}
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Email */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Email professionnel</label>
+          <label className="block text-sm font-semibold text-gray-700 mb-1">
+            Email professionnel
+          </label>
           <input
             {...register("email")}
             type="email"
             className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
             placeholder="jean.mbuyi@exemple.cd"
           />
-          {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+          {errors.email && (
+            <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
+          )}
         </div>
 
         {/* Téléphone */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Téléphone (+243)</label>
+          <label className="block text-sm font-semibold text-gray-700 mb-1">
+            Téléphone (+243)
+          </label>
           <input
             {...register("phone")}
             className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
             placeholder="081XXXXXXX"
           />
-          {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
+          {errors.phone && (
+            <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>
+          )}
         </div>
+      </div>
+
+      {/* Localisation */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-1">
+            Ville
+          </label>
+          <input
+            {...register("location.city")}
+            className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+            placeholder="Lubumbashi"
+          />
+          {errors.location?.city && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.location.city.message}
+            </p>
+          )}
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-1">
+            Pays
+          </label>
+          <input
+            {...register("location.country")}
+            className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+            placeholder="RDC"
+          />
+          {errors.location?.country && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.location.country.message}
+            </p>
+          )}
+        </div>
+      </div>
+
+      {/* Titre professionnel */}
+      <div className="md:col-span-2">
+        <label className="block text-sm font-semibold text-gray-700 mb-1">
+          Titre professionnel
+        </label>
+        <input
+          {...register("professionalTitle")}
+          className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+          placeholder="Ex: Développeur Web Full Stack"
+        />
+        {errors.professionalTitle && (
+          <p className="text-red-500 text-xs mt-1">
+            {errors.professionalTitle.message}
+          </p>
+        )}
       </div>
 
       {/* Bio / Profil */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-1">Résumé professionnel</label>
+        <label className="block text-sm font-semibold text-gray-700 mb-1">
+          Résumé professionnel
+        </label>
         <textarea
           {...register("bio")}
           rows={4}
           className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
           placeholder="Décrivez brièvement votre parcours et vos aspirations..."
         />
-        <p className="text-gray-400 text-[10px] text-right">Max 500 caractères</p>
+        <p className="text-gray-400 text-[10px] text-right">
+          Max 500 caractères
+        </p>
       </div>
 
       {/* LinkedIn */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-1">Lien LinkedIn (Optionnel)</label>
+        <label className="block text-sm font-semibold text-gray-700 mb-1">
+          Lien LinkedIn (Optionnel)
+        </label>
         <input
           {...register("linkedin")}
           className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"

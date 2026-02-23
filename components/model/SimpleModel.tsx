@@ -12,7 +12,15 @@ const SimpleModel = ({ cv }: ResumeProps) => {
   const contacts = [
     { icon: <Phone size={14} />, text: personalInfo.phone },
     { icon: <Mail size={14} />, text: personalInfo.email },
-    { icon: <MapPin size={14} />, text: personalInfo.address },
+    // { icon: <MapPin size={14} />, text: personalInfo.address },
+    {
+      icon: <MapPin size={14} />,
+      text:
+        personalInfo.location?.formatted ||
+        (personalInfo.location?.city && personalInfo.location?.country
+          ? `${personalInfo.location.city}, ${personalInfo.location.country}`
+          : ""),
+    },
     {
       icon: <Globe size={14} />,
       text:
@@ -23,9 +31,10 @@ const SimpleModel = ({ cv }: ResumeProps) => {
   return (
     <div
       className="cv-theme bg-white w-[794px] mx-auto shadow-lg"
-      style={{ 
-        // minHeight: "1123px", 
-        fontFamily: "'Inter', sans-serif" }}
+      style={{
+        // minHeight: "1123px",
+        fontFamily: "'Inter', sans-serif",
+      }}
     >
       {/* Header */}
       <header className="pt-14 pb-10 px-16 text-right">

@@ -31,8 +31,15 @@ const CvSchema = new Schema(
     personalInfo: {
       firstName: { type: String, required: true },
       lastName: { type: String, required: true },
+      professionalTitle: { type: String }, // Développeur Web
       email: { type: String, required: true },
       phone: String,
+      location: {
+        city: String,
+        state: String,
+        country: String,
+        formatted: String, // "Lubumbashi, RDC"
+      },
       address: String,
       profilePicture: String,
       bio: { type: String, maxlength: 500 },
@@ -66,7 +73,7 @@ const CvSchema = new Schema(
     isPublic: { type: Boolean, default: false },
     slug: { type: String, unique: true, sparse: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 // À la toute fin de ton fichier Cv.ts
