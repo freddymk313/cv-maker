@@ -1,7 +1,7 @@
 "use client";
 
 import { CvType } from "@/types/CvType";
-import { Phone, Mail, MapPin, Globe } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
 
 interface ResumeProps {
   cv: CvType;
@@ -12,50 +12,45 @@ const ModelTwo = ({ cv }: ResumeProps) => {
 
   return (
     <div
-      className="bg-white w-[794px] mx-auto shadow-lg text-[#333]"
+      className="bg-white w-[794px] mx-auto shadow-2xl text-[#1a1110] relative"
       style={{
         minHeight: "1123px",
         fontFamily: "'Inter', sans-serif",
       }}
     >
-      {/* HEADER : Nom et Poste centrés */}
-      <header className="pt-16 pb-10 text-center">
-        <h1 className="text-6xl font-bold tracking-tight text-[#333]">
+      {/* HEADER : Centrage absolu au milieu du bloc #f6f6f6 */}
+      <header className="h-[280px] flex flex-col items-center justify-center bg-[#f6f6f6] border-b border-[#545454] px-10 text-center">
+        <h1 className="text-[64px] font-bold leading-[1.1] tracking-tight text-[#333333]">
           {personalInfo.firstName} {personalInfo.lastName}
         </h1>
-        <p className="text-xl uppercase tracking-[0.2em] mt-3 text-[#444] font-medium">
-          {personalInfo.professionalTitle || "PROFESSIONAL TITLE"}
+        <p className="text-2xl text-[#444444] mt-4 font-medium tracking-[0.15em]">
+          {personalInfo.professionalTitle || "Web Development"}
         </p>
       </header>
 
-      {/* Ligne horizontale de séparation */}
-      <div className="mx-12 border-t border-gray-300" />
-
-      {/* BODY : Deux colonnes avec séparation verticale */}
-      <div className="flex px-12 py-10 min-h-[800px]">
-        
-        {/* COLONNE GAUCHE (Contact, Skills, Education, Language) */}
-        <div className="w-[35%] pr-8 border-r border-gray-300">
-          
+      {/* BODY CONTAINER */}
+      <div className="flex px-16 *py-10 relative">
+        {/* COLONNE GAUCHE */}
+        <div className="w-[38%] pr-10 border-r border-[#545454] min-h-[700px]">
           {/* CONTACT */}
-          <section className="mb-10">
+          <section className="mb-12 pt-10">
             <SectionHeading>CONTACT:</SectionHeading>
-            <div className="mt-5 space-y-4 text-[13px]">
+            <div className="mt-6 space-y-4 text-[14px]">
               {personalInfo.phone && (
-                <div className="flex items-center gap-3">
-                  <Phone size={14} className="text-gray-700" />
+                <div className="flex items-center gap-4 text-[#4b5563]">
+                  <Phone size={16} strokeWidth={2.5} className="text-[#1a1a1a]" />
                   <span>{personalInfo.phone}</span>
                 </div>
               )}
               {personalInfo.email && (
-                <div className="flex items-center gap-3">
-                  <Mail size={14} className="text-gray-700" />
+                <div className="flex items-center gap-4 text-[#4b5563]">
+                  <Mail size={16} strokeWidth={2.5} className="text-[#1a1a1a]" />
                   <span className="break-all">{personalInfo.email}</span>
                 </div>
               )}
               {(personalInfo.location?.city || personalInfo.location?.country) && (
-                <div className="flex items-center gap-3">
-                  <MapPin size={14} className="text-gray-700" />
+                <div className="flex items-center gap-4 text-[#4b5563]">
+                  <MapPin size={16} strokeWidth={2.5} className="text-[#1a1a1a]" />
                   <span>
                     {personalInfo.location.city}, {personalInfo.location.country}
                   </span>
@@ -66,12 +61,12 @@ const ModelTwo = ({ cv }: ResumeProps) => {
 
           {/* SKILLS */}
           {skills && skills.length > 0 && (
-            <section className="mb-10">
+            <section className="mb-12">
               <SectionHeading>SKILLS:</SectionHeading>
-              <ul className="mt-5 space-y-2 text-[13px]">
+              <ul className="mt-6 space-y-3 text-[14px] text-[#4b5563]">
                 {skills.map((s, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <span className="text-gray-400">•</span>
+                    <span className="mt-[2px]">•</span>
                     {s.name}
                   </li>
                 ))}
@@ -81,18 +76,19 @@ const ModelTwo = ({ cv }: ResumeProps) => {
 
           {/* EDUCATION */}
           {education && education.length > 0 && (
-            <section className="mb-10">
+            <section className="mb-12">
               <SectionHeading>EDUCATION:</SectionHeading>
-              <div className="mt-5 space-y-6">
+              <div className="mt-6 space-y-8">
                 {education.map((edu, i) => (
                   <div key={i}>
-                    <p className="text-[13px] font-bold uppercase leading-tight">
+                    <p className="text-[14px] font-bold text-[#1a1a1a] uppercase leading-tight">
                       {edu.school}
                     </p>
-                    <p className="text-[12px] text-gray-600 font-bold mt-1">
-                      {edu.startDate ? new Date(edu.startDate).getFullYear() : ""} - {edu.endDate ? new Date(edu.endDate).getFullYear() : "Present"}
+                    <p className="text-[13px] font-bold text-[#1a1a1a] mt-1">
+                      {edu.startDate ? new Date(edu.startDate).getFullYear() : ""} -{" "}
+                      {edu.endDate ? new Date(edu.endDate).getFullYear() : "Present"}
                     </p>
-                    <p className="text-[13px] text-gray-600 mt-1">{edu.degree}</p>
+                    <p className="text-[14px] text-[#4b5563] mt-1">{edu.degree}</p>
                   </div>
                 ))}
               </div>
@@ -103,10 +99,10 @@ const ModelTwo = ({ cv }: ResumeProps) => {
           {languages && languages.length > 0 && (
             <section>
               <SectionHeading>LANGUAGE:</SectionHeading>
-              <ul className="mt-5 space-y-2 text-[13px]">
+              <ul className="mt-6 space-y-3 text-[14px] text-[#4b5563]">
                 {languages.map((l, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <span className="text-gray-400">•</span>
+                    <span className="mt-[2px]">•</span>
                     {l.language}
                   </li>
                 ))}
@@ -115,14 +111,13 @@ const ModelTwo = ({ cv }: ResumeProps) => {
           )}
         </div>
 
-        {/* COLONNE DROITE (Profile, Experience, References) */}
-        <div className="flex-1 pl-10">
-          
+        {/* COLONNE DROITE */}
+        <div className="flex-1 pl-12 pt-10">
           {/* PROFILE */}
           {personalInfo.bio && (
-            <section className="mb-10">
+            <section className="mb-12">
               <SectionHeading>PROFILE:</SectionHeading>
-              <p className="mt-5 text-[13px] leading-relaxed text-gray-700 text-justify">
+              <p className="mt-6 text-[14px] leading-relaxed text-[#4b5563] text-justify">
                 {personalInfo.bio}
               </p>
             </section>
@@ -130,26 +125,26 @@ const ModelTwo = ({ cv }: ResumeProps) => {
 
           {/* WORK EXPERIENCE */}
           {experiences && experiences.length > 0 && (
-            <section className="mb-10">
+            <section className="mb-12">
               <SectionHeading>EXPERIENCE:</SectionHeading>
-              <div className="mt-5 space-y-8">
+              <div className="mt-6 space-y-10">
                 {experiences.map((exp, i) => (
                   <div key={i} className="break-inside-avoid">
-                    <div className="flex justify-between items-baseline">
-                      <p className="text-[13px] font-bold uppercase tracking-wide">
-                        {exp.position}
+                    <div className="flex flex-col">
+                      <p className="text-[15px] font-bold uppercase tracking-tight text-[#1a1a1a]">
+                        {exp.position}{" "}
+                        {exp.startDate ? new Date(exp.startDate).getFullYear() : ""} -{" "}
+                        {exp.isCurrent ? "PRESENT" : exp.endDate ? new Date(exp.endDate).getFullYear() : ""}
                       </p>
-                      <p className="text-[12px] font-bold text-gray-700">
-                         {exp.startDate ? new Date(exp.startDate).getFullYear() : ""} - {exp.isCurrent ? "PRESENT" : exp.endDate ? new Date(exp.endDate).getFullYear() : ""}
+                      <p className="text-[14px] text-[#1a1a1a] font-bold mt-1 italic">
+                        {exp.company}
                       </p>
                     </div>
-                    <p className="text-[13px] text-gray-600 font-bold italic mt-1">
-                      {exp.company}
-                    </p>
-                    <div className="mt-3 space-y-2">
+
+                    <div className="mt-4 space-y-2">
                       {exp.description?.split("\n").filter(l => l.trim()).map((line, idx) => (
-                        <div key={idx} className="flex items-start gap-2 text-[13px] leading-relaxed text-gray-700">
-                          <span className="text-gray-400">•</span>
+                        <div key={idx} className="flex items-start gap-2 text-[14px] leading-relaxed text-[#4b5563]">
+                          <span className="mt-[2px]">•</span>
                           <span>{line.replace(/^[-•]\s*/, "")}</span>
                         </div>
                       ))}
@@ -165,9 +160,8 @@ const ModelTwo = ({ cv }: ResumeProps) => {
   );
 };
 
-/* Sous-composant pour les titres de section uniformes */
 const SectionHeading = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="font-extrabold text-[15px] tracking-[0.15em] uppercase text-[#1a1a1a]">
+  <h2 className="font-black text-[18px] tracking-[0.2em] uppercase text-[#1a1a1a]">
     {children}
   </h2>
 );
