@@ -23,12 +23,12 @@ import LanguagesForm from "@/components/cv/LanguagesForm";
 import TemplateForm from "@/components/cv/TemplateForm";
 
 const steps = [
+  { id: "template", label: "Design", icon: Layout },
   { id: "personalInfo", label: "Infos", icon: User },
   { id: "experiences", label: "Expériences", icon: Briefcase },
   { id: "education", label: "Études", icon: GraduationCap },
   { id: "skills", label: "Compétences", icon: Code },
   { id: "languages", label: "Langues", icon: Languages },
-  { id: "template", label: "Design", icon: Layout },
 ];
 
 export default function CreateCv() {
@@ -158,15 +158,7 @@ export default function CreateCv() {
           </p>
         </div>
 
-        <div className="py-4">
-          {/* {currentStep === 0 && (
-            <PersonalInfoForm
-              initialData={cvData?.personalInfo}
-              onSubmit={(data) => saveStepData("personalInfo", data)}
-              isLoading={isLoading}
-            />
-          )} */}
-
+        {/* <div className="py-4">
           {currentStep === 0 && (
             <PersonalInfoForm
               initialData={cvData?.personalInfo}
@@ -226,6 +218,71 @@ export default function CreateCv() {
             <TemplateForm
               initialData={cvData?.templateId}
               onSubmit={(data) => saveStepData("template", data)}
+              isLoading={isLoading}
+            />
+          )}
+        </div> */}
+
+        <div className="py-4">
+          {currentStep === 0 && (
+            <TemplateForm
+              initialData={cvData?.templateId}
+              onSubmit={(data) => saveStepData("template", data)}
+              isLoading={isLoading}
+            />
+          )}
+
+          {currentStep === 1 && (
+            <PersonalInfoForm
+              initialData={cvData?.personalInfo}
+              onSubmit={(data) => {
+                const formattedLocation =
+                  data.location?.city && data.location?.country
+                    ? `${data.location.city}, ${data.location.country}`
+                    : "";
+
+                const enrichedData = {
+                  ...data,
+                  location: {
+                    ...data.location,
+                    formatted: formattedLocation,
+                  },
+                };
+
+                saveStepData("personalInfo", enrichedData);
+              }}
+              isLoading={isLoading}
+            />
+          )}
+
+          {currentStep === 2 && (
+            <ExperiencesForm
+              initialData={cvData?.experiences}
+              onSubmit={(data) => saveStepData("experiences", data)}
+              isLoading={isLoading}
+            />
+          )}
+
+          {currentStep === 3 && (
+            <EducationForm
+              initialData={cvData?.education}
+              onSubmit={(data) => saveStepData("education", data)}
+              isLoading={isLoading}
+            />
+          )}
+
+          {currentStep === 4 && (
+            <SkillsForm
+              initialData={cvData?.skills}
+              onSubmit={(data) => saveStepData("skills", data)}
+              isLoading={isLoading}
+            />
+          )}
+
+          {currentStep === 5 && (
+            <LanguagesForm
+              initialData={cvData?.languages}
+              onSubmit={(data) => saveStepData("languages", data)}
               isLoading={isLoading}
             />
           )}
