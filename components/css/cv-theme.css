@@ -21,6 +21,7 @@
   font-family: Georgia, serif;
 }
 
+
 .cv-page-container {
   background-color: #ffffff;
   width: 794px;
@@ -31,7 +32,22 @@
   background-size: 100% 1123px;
 }
 
-.break-inside-avoid {
+/* .break-inside-avoid {
   break-inside: avoid;
   page-break-inside: avoid;
+} */
+
+/* Dans ton fichier CSS (cv-theme.css par exemple) */
+@media print {
+  /* Cette règle ajoute de l'espace en haut de chaque nouvelle page sauf la première */
+  div {
+    break-inside: avoid;
+  }
+}
+
+/* Technique du "Spacer" invisible */
+.page-2-margin-top {
+  height: 40px; /* La taille de ta marge souhaitée */
+  display: block;
+  content: "";
 }
