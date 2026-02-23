@@ -15,7 +15,7 @@ export default function PreviewClient({ cv }: { cv: any }) {
       const html2pdf = (await import("html2pdf.js")).default;
 
       const opt = {
-        // AJOUT DE MARGE : Cela crée l'espace top sur la page 2 automatiquement
+        // AJOUT DE MARGE : Cela crée l'espace top sur la page 
         margin: [40, 0, 40, 0], 
         filename: `CV_${cv.personalInfo?.lastName || "export"}.pdf`,
         image: { type: "jpeg", quality: 0.98 },
