@@ -24,9 +24,11 @@ const ModernModel = forwardRef<HTMLDivElement, ResumeProps>(({ cv }, ref) => {
       <div className="w-[300px] bg-black text-white flex-shrink-0 flex flex-col">
         {/* Photo de profil */}
         <div className="w-full h-[320px] overflow-hidden bg-zinc-800">
-          {personalInfo.image ? (
+          {/* {personalInfo.image ? ( */}
+          {true? (
             <img
-              src={personalInfo.image}
+              // src={personalInfo.image}
+              src="/test.jpg"
               alt={`${personalInfo.firstName} ${personalInfo.lastName}`}
               className="w-full h-full object-cover grayscale"
             />
@@ -92,9 +94,9 @@ const ModernModel = forwardRef<HTMLDivElement, ResumeProps>(({ cv }, ref) => {
           <h1 className="text-black font-black text-[56px] leading-[0.9] tracking-tighter uppercase">
             {personalInfo.firstName}<br />{personalInfo.lastName}
           </h1>
-          {personalInfo.title && (
+          {personalInfo.professionalTitle && (
             <p className="mt-6 text-[#7d94ad] font-bold text-base tracking-[0.1em] uppercase">
-              {personalInfo.title}
+              {personalInfo.professionalTitle}
             </p>
           )}
         </header>
@@ -102,7 +104,7 @@ const ModernModel = forwardRef<HTMLDivElement, ResumeProps>(({ cv }, ref) => {
         {/* Profil / Bio */}
         {personalInfo.bio && (
           <div className="mt-6">
-            <p className="text-[13px] text-gray-700 leading-relaxed max-w-[95%]">
+            <p className="text-[13px] text-gray-700 leading-relaxed max-w-[95%] text-justify">
               {personalInfo.bio}
             </p>
           </div>

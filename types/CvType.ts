@@ -91,24 +91,44 @@ export interface InterestType {
   name: string;
 }
 
+// export interface PersonalInfoType {
+//   firstName: string;
+//   lastName: string;
+//   email: string;
+//   title?: string;      // AJOUTÉ : Le titre du poste (ex: "Développeur Web")
+//   phone?: string;
+//   address?: string;
+//   profilePicture?: string; 
+//   image?: string;      // ALIAS : Souvent utilisé indifféremment avec profilePicture
+//   bio?: string;
+//   linkedin?: string;
+//   github?: string;
+//   website?: string;
+//   location?: {
+//     formatted?: string;
+//     city?: string;
+//     country?: string;
+//   };
+// }
+
 export interface PersonalInfoType {
   firstName: string;
   lastName: string;
+  professionalTitle?: string; // corresponds to model.personalInfo.professionalTitle
   email: string;
-  title?: string;      // AJOUTÉ : Le titre du poste (ex: "Développeur Web")
   phone?: string;
+  location?: {
+    city?: string;
+    state?: string;
+    country?: string;
+    formatted?: string;
+  };
   address?: string;
-  profilePicture?: string; 
-  image?: string;      // ALIAS : Souvent utilisé indifféremment avec profilePicture
+  profilePicture?: string;
   bio?: string;
   linkedin?: string;
   github?: string;
   website?: string;
-  location?: {
-    formatted?: string;
-    city?: string;
-    country?: string;
-  };
 }
 
 export interface CvType {
