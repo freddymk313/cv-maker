@@ -7,17 +7,21 @@ interface ResumeProps {
 }
 
 const ModernModel = forwardRef<HTMLDivElement, ResumeProps>(({ cv }, ref) => {
-  const { personalInfo, experiences, education, skills, languages, interests } = cv;
+  const { personalInfo, experiences, education, skills, languages, interests } =
+    cv;
 
   // Formattage des dates pour le rendu
   const formatDate = (date: string | Date | undefined) => {
     if (!date) return "";
-    return new Date(date).toLocaleString('fr-FR', { month: 'long', year: 'numeric' });
+    return new Date(date).toLocaleString("fr-FR", {
+      month: "long",
+      year: "numeric",
+    });
   };
 
   return (
-    <div 
-      ref={ref} 
+    <div
+      ref={ref}
       className="cv-theme-modern w-[794px] h-[1123px] bg-white mx-auto shadow-lg flex overflow-hidden font-sans"
     >
       {/* Sidebar Gauche (Noire) */}
@@ -25,7 +29,7 @@ const ModernModel = forwardRef<HTMLDivElement, ResumeProps>(({ cv }, ref) => {
         {/* Photo de profil */}
         <div className="w-full h-[320px] overflow-hidden bg-zinc-800">
           {/* {personalInfo.image ? ( */}
-          {true? (
+          {true ? (
             <img
               // src={personalInfo.image}
               src="/test.jpg"
@@ -33,19 +37,23 @@ const ModernModel = forwardRef<HTMLDivElement, ResumeProps>(({ cv }, ref) => {
               className="w-full h-full object-cover grayscale"
             />
           ) : (
-             <div className="w-full h-full flex items-center justify-center text-zinc-500 italic">
-               Pas de photo
-             </div>
+            <div className="w-full h-full flex items-center justify-center text-zinc-500 italic">
+              Pas de photo
+            </div>
           )}
         </div>
 
         {/* Coordonnées */}
         <div className="px-10 pt-12 space-y-1.5 text-[13px] font-light opacity-90">
-          {personalInfo.address && <p>{personalInfo.address}</p>}
-          {personalInfo.email && <p>{personalInfo.email}</p>}
           {personalInfo.phone && <p>{personalInfo.phone}</p>}
+          {personalInfo.email && <p>{personalInfo.email}</p>}
+          {personalInfo.location?.formatted && (
+            <p>{personalInfo.location.formatted}</p>
+          )}
           {(personalInfo.website || personalInfo.linkedin) && (
-            <p className="truncate">{personalInfo.website || personalInfo.linkedin}</p>
+            <p className="truncate">
+              {personalInfo.website || personalInfo.linkedin}
+            </p>
           )}
         </div>
 
@@ -55,7 +63,9 @@ const ModernModel = forwardRef<HTMLDivElement, ResumeProps>(({ cv }, ref) => {
             <SidebarHeading>LANGUES</SidebarHeading>
             <div className="mt-4 space-y-1 text-[13px] font-light opacity-90">
               {languages.map((l, i) => (
-                <p key={i}>{l.language} {l.level ? `- ${l.level}` : ""}</p>
+                <p key={i}>
+                  {l.language} {l.level ? `- ${l.level}` : ""}
+                </p>
               ))}
             </div>
           </div>
@@ -88,11 +98,12 @@ const ModernModel = forwardRef<HTMLDivElement, ResumeProps>(({ cv }, ref) => {
 
       {/* Colonne Droite (Contenu) */}
       <div className="flex-1 px-12 pt-16 pb-12 flex flex-col bg-white overflow-hidden">
-        
         {/* Nom et Prénom */}
         <header>
           <h1 className="text-black font-black text-[56px] leading-[0.9] tracking-tighter uppercase">
-            {personalInfo.firstName}<br />{personalInfo.lastName}
+            {personalInfo.firstName}
+            <br />
+            {personalInfo.lastName}
           </h1>
           {personalInfo.professionalTitle && (
             <p className="mt-6 text-[#7d94ad] font-bold text-base tracking-[0.1em] uppercase">
@@ -121,12 +132,26 @@ const ModernModel = forwardRef<HTMLDivElement, ResumeProps>(({ cv }, ref) => {
                     {exp.position}
                   </h3>
                   <p className="text-[12px] text-gray-400 mt-1 font-medium italic">
-                    {exp.company}, {exp.location} | {formatDate(exp.startDate)} - {exp.isCurrent ? "Présent" : formatDate(exp.endDate)}
+                    {exp.company}, {exp.location} | {formatDate(exp.startDate)}{" "}
+                    - {exp.isCurrent ? "Présent" : formatDate(exp.endDate)}
                   </p>
                   {exp.description && (
                     <div className="mt-3 text-[13px] text-gray-700 leading-relaxed">
                       {/* Si la description contient des listes ou plusieurs lignes */}
-                      <p className="whitespace-pre-line">{exp.description}</p>
+                      <div className="whitespace-pre-line">
+                        {exp.description
+                          ?.split("\n")
+                          .filter((line) => line.trim() !== "")
+                          .map((line, idx) => (
+                            <div
+                              key={idx}
+                              className="flex items-start gap-2 text-sm leading-relaxed"
+                            >
+                              <span className="mt-[2px]">•</span>
+                              <span>{line.replace(/^[-•]\s*/, "")}</span>
+                            </div>
+                          ))}
+                      </div>
                     </div>
                   )}
                 </div>
@@ -146,7 +171,12 @@ const ModernModel = forwardRef<HTMLDivElement, ResumeProps>(({ cv }, ref) => {
                     {edu.degree}
                   </h3>
                   <p className="text-[12px] text-gray-400 mt-1 font-medium">
-                    {edu.school}, {edu.location} | {edu.startDate ? new Date(edu.startDate).getFullYear() : ""} - {edu.endDate ? new Date(edu.endDate).getFullYear() : "Présent"}
+                    {edu.school}, {edu.location} |{" "}
+                    {edu.startDate ? new Date(edu.startDate).getFullYear() : ""}{" "}
+                    -{" "}
+                    {edu.endDate
+                      ? new Date(edu.endDate).getFullYear()
+                      : "Présent"}
                   </p>
                 </div>
               ))}
