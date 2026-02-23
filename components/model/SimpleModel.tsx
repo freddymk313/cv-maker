@@ -62,9 +62,9 @@ const SimpleModel = ({ cv }: ResumeProps) => {
                 {contacts.map((c, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-3 text-sm text-[#404040] leading-normal"
+                    className="flex items-center gap-3 text-sm text-[#404040]"
                   >
-                    <span className="text-[#1a1a1a] flex-shrink-0 mt-[2px]">
+                    <span className="text-[#1a1a1a] mt-2">
                       {c.icon}
                     </span>
                     <span className="break-all">{c.text}</span>
@@ -126,7 +126,7 @@ const SimpleModel = ({ cv }: ResumeProps) => {
             {personalInfo.bio && (
               <div className="mb-10">
                 <SectionHeading>PROFILE</SectionHeading>
-                <p className="mt-5 text-sm leading-relaxed text-[#404040]">
+                <p className="mt-5 text-sm leading-relaxed text-[#404040] text-justify">
                   {personalInfo.bio}
                 </p>
               </div>
