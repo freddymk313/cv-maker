@@ -11,11 +11,24 @@ interface Props {
   isLoading: boolean;
 }
 
-export default function ExperiencesForm({ initialData, onSubmit, isLoading }: Props) {
-  const { register, control, handleSubmit, watch, formState: { errors } } = useForm<ExperienceInput>({
+export default function ExperiencesForm({
+  initialData,
+  onSubmit,
+  isLoading,
+}: Props) {
+  const {
+    register,
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<ExperienceInput>({
     resolver: zodResolver(experienceSchema),
     defaultValues: {
-      experiences: initialData?.length > 0 ? initialData : [{ company: "", position: "", startDate: "", isCurrent: false }]
+      experiences:
+        initialData?.length > 0
+          ? initialData
+          : [{ company: "", position: "", startDate: "", isCurrent: false }],
     },
   });
 
@@ -25,9 +38,16 @@ export default function ExperiencesForm({ initialData, onSubmit, isLoading }: Pr
   });
 
   return (
-    <form id="cv-form" onSubmit={handleSubmit((data) => onSubmit(data.experiences))} className="space-y-8">
+    <form
+      id="cv-form"
+      onSubmit={handleSubmit((data) => onSubmit(data.experiences))}
+      className="space-y-8"
+    >
       {fields.map((field, index) => (
-        <div key={field.id} className="p-6 border border-gray-100 rounded-2xl bg-gray-50/50 relative group">
+        <div
+          key={field.id}
+          className="p-6 border border-gray-100 rounded-2xl bg-gray-50/50 relative group"
+        >
           {/* Bouton Supprimer */}
           {fields.length > 1 && (
             <button
@@ -42,20 +62,26 @@ export default function ExperiencesForm({ initialData, onSubmit, isLoading }: Pr
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Entreprise */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Entreprise</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">
+                Entreprise
+              </label>
               <input
                 {...register(`experiences.${index}.company`)}
                 className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Ex: Vodacom RDC"
               />
               {errors.experiences?.[index]?.company && (
-                <p className="text-red-500 text-xs mt-1">{errors.experiences[index]?.company?.message}</p>
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.experiences[index]?.company?.message}
+                </p>
               )}
             </div>
 
             {/* Poste */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Poste occupé</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">
+                Poste occupé
+              </label>
               <input
                 {...register(`experiences.${index}.position`)}
                 className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
@@ -65,7 +91,9 @@ export default function ExperiencesForm({ initialData, onSubmit, isLoading }: Pr
 
             {/* Date Début */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Date de début</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">
+                Date de début
+              </label>
               <input
                 type="date"
                 {...register(`experiences.${index}.startDate`)}
@@ -75,7 +103,9 @@ export default function ExperiencesForm({ initialData, onSubmit, isLoading }: Pr
 
             {/* Date Fin ou Poste actuel */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Date de fin</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">
+                Date de fin
+              </label>
               <div className="space-y-2">
                 <input
                   type="date"
@@ -89,7 +119,9 @@ export default function ExperiencesForm({ initialData, onSubmit, isLoading }: Pr
                     {...register(`experiences.${index}.isCurrent`)}
                     className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                   />
-                  <span className="text-xs text-gray-600 font-medium">Poste actuel</span>
+                  <span className="text-xs text-gray-600 font-medium">
+                    Poste actuel
+                  </span>
                 </label>
               </div>
             </div>
@@ -97,12 +129,18 @@ export default function ExperiencesForm({ initialData, onSubmit, isLoading }: Pr
 
           {/* Description */}
           <div className="mt-4">
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Description des tâches</label>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">
+              Description des tâches
+            </label>
             <textarea
               {...register(`experiences.${index}.description`)}
               rows={3}
               className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Décrivez vos réalisations..."
+              // placeholder="Décrivez vos réalisations..."
+              placeholder={`Ex:
+- Gestion de la comptabilité journalière
+- Analyse financière mensuelle
+- Supervision d'une équipe de 3 personnes`}
             />
           </div>
         </div>
@@ -111,7 +149,9 @@ export default function ExperiencesForm({ initialData, onSubmit, isLoading }: Pr
       {/* Bouton Ajouter une expérience */}
       <button
         type="button"
-        onClick={() => append({ company: "", position: "", startDate: "", isCurrent: false })}
+        onClick={() =>
+          append({ company: "", position: "", startDate: "", isCurrent: false })
+        }
         className="w-full py-4 border-2 border-dashed border-gray-200 rounded-2xl text-gray-500 hover:border-blue-400 hover:text-blue-500 transition-all flex items-center justify-center gap-2 font-medium"
       >
         <Plus className="w-5 h-5" />

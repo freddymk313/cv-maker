@@ -62,9 +62,11 @@ const SimpleModel = ({ cv }: ResumeProps) => {
                 {contacts.map((c, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-3 text-sm text-[#404040]"
+                    className="flex items-center gap-3 text-sm text-[#404040] leading-normal"
                   >
-                    <span className="text-[#1a1a1a]">{c.icon}</span>
+                    <span className="text-[#1a1a1a] flex-shrink-0 mt-[2px]">
+                      {c.icon}
+                    </span>
                     <span className="break-all">{c.text}</span>
                   </div>
                 ))}
@@ -157,9 +159,23 @@ const SimpleModel = ({ cv }: ResumeProps) => {
                               : ""}
                         </p>
                       </div>
-                      <p className="text-sm mt-2 text-[#404040] leading-relaxed">
-                        {exp.description}
-                      </p>
+                      <div className="text-sm mt-2 text-[#404040] leading-relaxed">
+                        {/* {exp.description} */}
+                        <div className="mt-3 space-y-2">
+                          {exp.description
+                            ?.split("\n")
+                            .filter((line) => line.trim() !== "")
+                            .map((line, idx) => (
+                              <div
+                                key={idx}
+                                className="flex items-start gap-2 text-sm leading-relaxed"
+                              >
+                                <span className="mt-[2px]">•</span>
+                                <span>{line.replace(/^[-•]\s*/, "")}</span>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </div>
