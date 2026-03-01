@@ -35,21 +35,21 @@ const ModelTwo = ({ cv }: ResumeProps) => {
           {/* CONTACT */}
           <section className="mb-12 pt-10">
             <SectionHeading>CONTACT:</SectionHeading>
-            <div className="mt-6 space-y-4 text-[14px]">
+            <div className="mt-6 space-y-3 text-[14px]">
               {personalInfo.phone && (
-                <div className="flex items-center gap-4 text-[#4b5563]">
+                <div className="flex items-center gap-2.5 text-[#4b5563]">
                   <Phone size={16} strokeWidth={2.5} className="text-[#1a1a1a]" />
                   <span>{personalInfo.phone}</span>
                 </div>
               )}
               {personalInfo.email && (
-                <div className="flex items-center gap-4 text-[#4b5563]">
+                <div className="flex items-center gap-2.5 text-[#4b5563]">
                   <Mail size={16} strokeWidth={2.5} className="text-[#1a1a1a]" />
                   <span className="break-all">{personalInfo.email}</span>
                 </div>
               )}
               {(personalInfo.location?.city || personalInfo.location?.country) && (
-                <div className="flex items-center gap-4 text-[#4b5563]">
+                <div className="flex items-center gap-2.5 text-[#4b5563]">
                   <MapPin size={16} strokeWidth={2.5} className="text-[#1a1a1a]" />
                   <span>
                     {personalInfo.location.city}, {personalInfo.location.country}
